@@ -113,16 +113,15 @@ class TestBase_model(unittest.TestCase):
 
     """
         Method save()
-    """
+    
     def test_is_save_update_well(self):
-        """ Test that save() update updated_at of the object """
-        obj = BaseModel()
-        obj.save()
-        self.assertTrue(obj.created_at != obj.updated_at)
+        x = BaseModel()
+        x.save()
+        self.assertTrue(x.created_at != x.updated_at)
 
     def test_is_save_update(self):
-        """ Test that save() update updated_at of the object """
-        obj = BaseModel()
-        h = obj.updated_at
-        obj.save()
-        self.assertTrue(h != obj.updated_at)
+        s = BaseModel()
+        h = s.updated_at
+        s.save()
+        self.assertTrue(h != s.updated_at)
+    """
