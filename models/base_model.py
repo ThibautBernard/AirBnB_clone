@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 from datetime import datetime
-#from models.__init__ import storage
 import models
 import uuid
-#from engine.file_storage import FileStorage
 """
     BaseModel class - defines all common attributes/methods for other classes
     All classes inherit from this class
