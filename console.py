@@ -11,10 +11,21 @@ from models.engine.file_storage import FileStorage
 
 
 class HBNBCommand(cmd.Cmd):
+    """
+    prompt : the prompt of interpreter.
+    exist_class : array of all class that exits.
+    obj : instance of FileStorage class to call method
+    after.
+    dict_obj : dictionary of all instance created
+    """
     prompt = '(hbtn) '
     exist_class = ["BaseModel"]
     obj = FileStorage()
     dict_obj = obj.all()
+
+    """ ***************************** """
+    """    Utilities methods below     """
+    """ ***************************** """
 
     def check_command(self, line):
         """Method that check arguments of a command
@@ -37,13 +48,19 @@ class HBNBCommand(cmd.Cmd):
                 return False
         return True
 
-    def help_quit(self):
-        """ Documentation to quit command """
-        print("Quit command to exit the program")
+    def split(self, dict_obj, id_to_match):
+        """ Search in dict if there is an
+            object with the same id
+            If yes, return the object
+        """
+        for i in dict_obj:
+            if dict_obj[i].id == id_to_match:
+                return dict_obj[i]
+        return None
 
-    def help_EOF(self):
-        """ Documentation to EOF"""
-        print("EOF to exit the program")
+    """ ***************************** """
+    """    Commands methods below     """
+    """ ***************************** """
 
     def do_create(self, line):
         """ Create an instance """
@@ -72,43 +89,6 @@ class HBNBCommand(cmd.Cmd):
             print(arr)
         else:
             print("** class doesn't exist **")
-
-    def help_all(self):
-        """Documentation of <all> command """
-        print("Prints all string representation of all instance " +
-              "based or not on the class name")
-        print("--- Usage ---")
-        print("-> (hbtn) all")
-        print("-> (hbtn) all <class_name>")
-
-    def help_create(self):
-        """Documentation of create command """
-        print("Creates a new instance and print the id")
-        print("--- Usage ---")
-        print("-> (hbtn) create <class_name>")
-
-    def help_show(self):
-        """Documentation of show command """
-        print("Prints the string representation of an instance " +
-              "based on the class name and id")
-        print("--- Usage ---")
-        print("-> (hbtn) show <class_name> <id_instance>")
-
-    def help_destroy(self):
-        """Documentation of destroy command """
-        print("Deletes an instance based on the class name and id")
-        print("--- Usage ---")
-        print("-> (hbtn) destroy <class_name> <id_instance>")
-
-    def help_update(self):
-        """Documentation of update command """
-        print("Updates an instance based on the class name " +
-              "and id by adding or updating attribute")
-        print("! Only one attribute can be updated at the time")
-        print("! id, created_at and updated_at cant’ be updated")
-        print("--- Usage ---")
-        print("-> (hbtn) update <class name> <id> " +
-              "<attribute name> \"<attribute value>\"")
 
     def do_show(self, line):
         """ Show an object """
@@ -151,16 +131,6 @@ class HBNBCommand(cmd.Cmd):
                 del HBNBCommand.dict_obj[i]
                 HBNBCommand.obj.save()
 
-    def split(self, dict_obj, id_to_match):
-        """ Search in dict if there is an
-            object with the same id
-            If yes, return the object
-        """
-        for i in dict_obj:
-            if dict_obj[i].id == id_to_match:
-                return dict_obj[i]
-        return None
-
     def do_quit(self, s):
         """ Quit command """
         return True
@@ -173,6 +143,56 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Empty line send """
         pass
+
+    """ ***************************** """
+    """ Documentation commands below """
+    """ ***************************** """
+
+    def help_quit(self):
+        """ Documentation to quit command """
+        print("Quit command to exit the program")
+
+    def help_EOF(self):
+        """ Documentation to EOF"""
+        print("EOF to exit the program")
+
+    def help_all(self):
+        """Documentation of <all> command """
+        print("Prints all string representation of all instance " +
+              "based or not on the class name")
+        print("--- Usage ---")
+        print("-> (hbtn) all")
+        print("-> (hbtn) all <class_name>")
+
+    def help_create(self):
+        """Documentation of create command """
+        print("Creates a new instance and print the id")
+        print("--- Usage ---")
+        print("-> (hbtn) create <class_name>")
+
+    def help_show(self):
+        """Documentation of show command """
+        print("Prints the string representation of an instance " +
+              "based on the class name and id")
+        print("--- Usage ---")
+        print("-> (hbtn) show <class_name> <id_instance>")
+
+    def help_destroy(self):
+        """Documentation of destroy command """
+        print("Deletes an instance based on the class name and id")
+        print("--- Usage ---")
+        print("-> (hbtn) destroy <class_name> <id_instance>")
+
+    def help_update(self):
+        """Documentation of update command """
+        print("Updates an instance based on the class name " +
+              "and id by adding or updating attribute")
+        print("! Only one attribute can be updated at the time")
+        print("! id, created_at and updated_at cant’ be updated")
+        print("--- Usage ---")
+        print("-> (hbtn) update <class name> <id> " +
+              "<attribute name> \"<attribute value>\"")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
