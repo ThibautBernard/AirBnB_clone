@@ -27,8 +27,8 @@ class FileStorage:
             Serialize
             Save objects from dictionnary __objects into a file (format json)
         """
+        d = {}
         if len(FileStorage.__objects) > 0:
-            d = {}
             for i in FileStorage.__objects:
                     if FileStorage.__objects[i] is dict:
                         d[i] = FileStorage.__objects[i]
@@ -43,9 +43,13 @@ class FileStorage:
         Load object from the file into python objects
         to dictionnary __objects
         """
+        file_not_empty = 0
         if path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path) as f:
                 json_f = f.read()
-                deserial = json.loads(json_f)
-            for i in deserial:
-                FileStorage.__objects[i] = BaseModel(**deserial[i])
+                if len(json_f) > 0:
+                    file_not_empty = 1
+                    deserial = json.loads(json_f)
+            if file_not_empty:
+                for i in deserial:
+                    FileStorage.__objects[i] = BaseModel(**deserial[i])
