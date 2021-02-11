@@ -2,8 +2,8 @@
 import cmd
 import sys
 from models.base_model import BaseModel
+from models.user import User
 from models.engine.file_storage import FileStorage
-
 """
     HBNBCommand - command line interpreter to manage
     our object/classess
@@ -19,7 +19,7 @@ class HBNBCommand(cmd.Cmd):
     dict_obj : dictionary of all instance created
     """
     prompt = '(hbtn) '
-    exist_class = ["BaseModel"]
+    exist_class = ["BaseModel", "User"]
     obj = FileStorage()
     dict_obj = obj.all()
 
@@ -69,9 +69,14 @@ class HBNBCommand(cmd.Cmd):
         elif line not in HBNBCommand.exist_class:
             print("** class doesn't exist **")
         else:
-            obj = BaseModel()
-            obj.save()
-            print(obj.id)
+            if line == "BaseModel":
+                obj = BaseModel()
+                obj.save()
+                print(obj.id)
+            elif line == "User":
+                user = User()
+                user.save()
+                print(user.id)
 
     def do_all(self, line):
         """ Print all object from a class in a list """

@@ -4,6 +4,7 @@ import os.path
 import sys
 from os import path
 from models.base_model import BaseModel
+from models.user import User
 """
     Store objects - Serialization/Deserialization
 """
@@ -35,8 +36,11 @@ class FileStorage:
                         # FileStorage.__objects[i] = FileStorage.__objects[i]
                     else:
                         d[i] = FileStorage.__objects[i].to_dict()
-        with open(self.__file_path, 'w') as f:
-            f.write(json.dumps(d))
+            with open(self.__file_path, 'w') as f:
+                f.write(json.dumps(d))
+        else:
+            with open(self.__file_path, 'w') as f:
+                f.write("")
 
     def reload(self):
         """ Deserialize
@@ -52,4 +56,9 @@ class FileStorage:
                     deserial = json.loads(json_f)
             if file_not_empty:
                 for i in deserial:
-                    FileStorage.__objects[i] = BaseModel(**deserial[i])
+                    name_class_only = i.split('.')
+                    # FileStorage.__objects[i] = o(**deserial[i])
+                    if name_class_only[0] == "BaseModel":
+                        FileStorage.__objects[i] = BaseModel(**deserial[i])
+                    elif name_class_only[0] == "User":
+                        FileStorage.__objects[i] = User(**deserial[i])

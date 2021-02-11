@@ -30,7 +30,8 @@ class BaseModel:
 
     def __str__(self):
         """ Return representation str of the object"""
-        return "[BaseModel] ({}) {}".format(self.id, self.__dict__)
+        name_class_obj = self.__class__.__name__
+        return "[{}] ({}) {}".format(name_class_obj, self.id, self.__dict__)
 
     def save(self):
         """ Update attribute updated_at"""
@@ -47,5 +48,5 @@ class BaseModel:
                 dicto[i] = tmp
             else:
                 dicto[i] = getattr(self, i)
-        dicto["__class__"] = "BaseModel"
+        dicto["__class__"] = self.__class__.__name__
         return dicto
