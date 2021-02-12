@@ -70,6 +70,57 @@ class HBNBCommand(cmd.Cmd):
     """ ***************************** """
     """    Commands methods below     """
     """ ***************************** """
+    def remove_quote(self, arr):
+        """
+        loop to a list and remove double quote from value
+        """
+        for idx, element in enumerate(arr):
+            if element[0] == '"' and element[-1] == '"':
+                arr[idx] = element[1:-1]
+            elif element[0] == "'" and element[-1] == "'":
+                arr[idx] = element[1:-1]
+
+    def default(self, line):
+        cmd = ['all', 'count', 'show', 'destroy', 'update']
+        tokens = line.split('.', 1)
+        method_cmd = tokens[1].split('(')[0]
+        if len(tokens) > 1 and method_cmd in cmd:
+            v = [p.split(')')[0] for p in tokens[1].split('(') if ')' in p]
+            tmp = v[0].split(", ")
+            self.remove_quote(tmp)
+            class_name = tokens[0]
+            if method_cmd == "all":
+                self.do_all(class_name)
+            elif method_cmd == "count":
+                self.do_count(class_name)
+            elif method_cmd == "show":
+                self.do_show(class_name + " " + tmp[0])
+            elif method_cmd == "destroy":
+                self.do_destroy(class_name + " " + tmp[0])
+            elif method_cmd == "update":
+                if len(tmp) == 1 and type(tmp[0]) is dict:
+                    self.do_update(class_name + " " + tmp[0])
+                else:
+                    s = class_name + " " + tmp[0] + " " + tmp[1] + " " + tmp[2]
+                    self.do_update(s)
+        else:
+            print("*** Unknown syntax: {}".format(line))
+
+    def do_count(self, class_name):
+        """ Count number of instance created for the
+        class_name
+        """
+        counter_instance = 0
+        if len(class_name) == 0 or len(class_name) == 2:
+            print("** class name missing **")
+        elif class_name in HBNBCommand.exist_class:
+            for i in HBNBCommand.dict_obj:
+                name_class = i.split('.')[0]
+                if name_class == class_name:
+                    counter_instance += 1
+            print(counter_instance)
+        else:
+            print("** class doesn't exist **")
 
     def do_create(self, line):
         """ Create an instance """
