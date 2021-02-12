@@ -4,6 +4,12 @@ import sys
 from models.base_model import BaseModel
 from models.user import User
 from models.engine.file_storage import FileStorage
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+
 """
     HBNBCommand - command line interpreter to manage
     our object/classess
@@ -19,7 +25,10 @@ class HBNBCommand(cmd.Cmd):
     dict_obj : dictionary of all instance created
     """
     prompt = '(hbtn) '
-    exist_class = ["BaseModel", "User"]
+    exist_class = [
+            "BaseModel", "User", "State",
+            "City", "Amenity", "Place", "Review"
+            ]
     obj = FileStorage()
     dict_obj = obj.all()
 
@@ -77,6 +86,26 @@ class HBNBCommand(cmd.Cmd):
                 user = User()
                 user.save()
                 print(user.id)
+            elif line == "State":
+                s = State()
+                s.save()
+                print(s.id)
+            elif line == "City":
+                c = City()
+                c.save()
+                print(c.id)
+            elif line == "Amenity":
+                a = Amenity()
+                a.save()
+                print(a.id)
+            elif line == "Place":
+                p = Place()
+                p.save()
+                print(p.id)
+            elif line == "Review":
+                r = Review()
+                r.save()
+                print(r.id)
 
     def do_all(self, line):
         """ Print all object from a class in a list """

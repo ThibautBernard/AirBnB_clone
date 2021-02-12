@@ -4,6 +4,12 @@ import os.path
 import sys
 from os import path
 from models.base_model import BaseModel
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+
 from models.user import User
 """
     Store objects - Serialization/Deserialization
@@ -62,3 +68,13 @@ class FileStorage:
                         FileStorage.__objects[i] = BaseModel(**deserial[i])
                     elif name_class_only[0] == "User":
                         FileStorage.__objects[i] = User(**deserial[i])
+                    elif name_class_only[0] == "State":
+                        FileStorage.__objects[i] = State(**deserial[i])
+                    elif name_class_only[0] == "Place":
+                        FileStorage.__objects[i] = Place(**deserial[i])
+                    elif name_class_only[0] == "City":
+                        FileStorage.__objects[i] = City(**deserial[i])
+                    elif name_class_only[0] == "Amenity":
+                        FileStorage.__objects[i] = Amenity(**deserial[i])
+                    elif name_class_only[0] == "Review":
+                        FileStorage.__objects[i] = Review(**deserial[i])
