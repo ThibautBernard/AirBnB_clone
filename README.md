@@ -1,9 +1,9 @@
 # AirBnB 
 ![](https://github.com/ThibautBernard/AirBnB_clone/blob/main/img_repo/fe2e3e7701dec72ce612472dab9bb55fe0e9f6d4.png)
 * This project is from my cursus at Holberton School. 
-* <br> The purpose of this project is to create a reproduction of the famous site *airbnb.com* from scratch.
-* <br> The language used in this project is Python, Javascript and *HTML/CSS*.
-* <br> The project will use also the framework **Flask** and will be hosted on **AWS**.
+* The purpose of this project is to create a reproduction of the famous site *airbnb.com* from scratch.
+* The language used in this project is Python, Javascript and *HTML/CSS*.
+* The project will use also the framework **Flask** and will be hosted on **AWS**.
 * Launch UnitTest ``` python3 -m unittest discover tests ```
 
 ## :large_blue_circle: Back-End : 
@@ -18,7 +18,7 @@
     * Deserialize
     * Return all current object
   * BaseModel
-    * Main classes were every classes will inherit from
+    * Main class were every classes will inherit from
     * unique id
     * created_at
     * updated_at
@@ -61,3 +61,4 @@
   * Help on one command ``` (hbtn) all <command_name> ```
 * Quit the console ``` (hbtn) quit ```
 
+#
