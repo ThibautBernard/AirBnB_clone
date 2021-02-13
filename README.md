@@ -1,3 +1,7 @@
+[![HitCount](http://hits.dwyl.com/ThibautBernard/AirBnB_clone.svg)](http://hits.dwyl.com/ThibautBernard/AirBnB_clone)
+[![Python Style Guide: Good](https://img.shields.io/badge/code%20style-goodparts-brightgreen.svg?style=flat)](https://github.com/dwyl/goodparts "Python Good")
+[![Inline docs](http://inch-ci.org/github/ThibautBernard/AirBnB_clone.svg?branch=master)](http://inch-ci.org/github/ThibautBernard/AirBnB_clone)
+
 # AirBnB 
 
 ![](https://github.com/ThibautBernard/AirBnB_clone/blob/main/img_repo/fe2e3e7701dec72ce612472dab9bb55fe0e9f6d4.png)
@@ -6,6 +10,7 @@
 * The purpose of this project is to create a reproduction of the famous site *airbnb.com* from scratch.
 * The language used in this project is Python, Javascript and *HTML/CSS*.
 * The project will use also the framework **Flask** and will be hosted on **AWS**.
+* 3 parts (Back-end, Front-end, Hosting)
 * Launch UnitTest ``` python3 -m unittest discover tests ```
 
 ## :large_blue_circle: Back-End : 
@@ -35,7 +40,15 @@
   * Destroy an object
   * Store and persist objects to a file (JSON file)
 
-
+### Knowledge (first part)
+* Create a Python package
+* How to create a command interpreter in Python using the cmd module
+* What is an UUID
+* How to serialize and deserialize a Class
+* How to write and read a JSON file
+* Use Unit testing and how to implement it in a large project
+* *args and how to use it
+* What is **kwargs and how to use it
 
 ### Usage of the console
 * Firstly ``` git clone https://github.com/ThibautBernard/AirBnB_clone ```
