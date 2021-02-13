@@ -1,14 +1,14 @@
 # AirBnB 
 ![](https://github.com/ThibautBernard/AirBnB_clone/blob/main/img_repo/fe2e3e7701dec72ce612472dab9bb55fe0e9f6d4.png)
-This project is from my cursus at Holberton School. 
-The purpose of this project is to create a reproduction of the famous site *airbnb.com* from scratch.
-<br> The language used in this project is Python, Javascript and *HTML/CSS*.
-<br> The project will use also the framework **Flask** and will be hosted on **AWS**.
+* This project is from my cursus at Holberton School. 
+* <br> The purpose of this project is to create a reproduction of the famous site *airbnb.com* from scratch.
+* <br> The language used in this project is Python, Javascript and *HTML/CSS*.
+* <br> The project will use also the framework **Flask** and will be hosted on **AWS**.
 * Launch UnitTest ``` python3 -m unittest discover tests ```
 
-## Back-End : 
+## :large_blue_circle: Back-End : 
 ![](https://github.com/ThibautBernard/AirBnB_clone/blob/main/img_repo/d2d06462824fab5846f3.png)
-### First step of the Back-end part
+### :pushpin: First step of the Back-end part
 #
 * :large_blue_diamond: Create all classes
   * FileStorage 
