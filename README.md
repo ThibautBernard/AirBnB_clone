@@ -1,5 +1,7 @@
 # AirBnB 
+
 ![](https://github.com/ThibautBernard/AirBnB_clone/blob/main/img_repo/fe2e3e7701dec72ce612472dab9bb55fe0e9f6d4.png)
+## Description 
 * This project is from my cursus at Holberton School. 
 * The purpose of this project is to create a reproduction of the famous site *airbnb.com* from scratch.
 * The language used in this project is Python, Javascript and *HTML/CSS*.
