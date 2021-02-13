@@ -45,18 +45,3 @@ class Testfile_storage(unittest.TestCase):
         x = f.all()
         self.assertTrue(type(x['BaseModel.{}'.format(id)]) is BaseModel)
     
-    def test_reload_transfrom_dict_to_object_dict(self):
-        """ Test that reload() transform dict to object """
-        obj = BaseModel()
-        f = FileStorage()
-        obj.name = "Holberton"
-        obj.my_number = 89
-        obj.save()
-        id = obj.id
-        before = f.all()
-        self.assertTrue(type(before['BaseModel.{}'.format(id)]) is dict)
-        key = 'BaseModel.{}'.format(id)
-        f.reload()
-        after = f.all()
-        self.assertTrue(type(before['BaseModel.{}'.format(id)]) is BaseModel)
-

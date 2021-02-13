@@ -30,6 +30,7 @@ class HBNBCommand(cmd.Cmd):
             "City", "Amenity", "Place", "Review"
             ]
     obj = FileStorage()
+    obj.save()
     dict_obj = obj.all()
 
     """ ***************************** """
@@ -67,12 +68,10 @@ class HBNBCommand(cmd.Cmd):
                 return dict_obj[i]
         return None
 
-    """ ***************************** """
-    """    Commands methods below     """
-    """ ***************************** """
     def remove_quote(self, arr):
         """
-        loop to a list and remove double quote from value
+        loop to a list and remove double quote or simple
+        quote from value
         """
         for idx, element in enumerate(arr):
             if element[0] == '"' and element[-1] == '"':
@@ -80,13 +79,65 @@ class HBNBCommand(cmd.Cmd):
             elif element[0] == "'" and element[-1] == "'":
                 arr[idx] = element[1:-1]
 
+    def type_casting(self, attr_type, value_to_type):
+        """ Check the type of attribute
+            and cast the value to the type
+            of the attribute of the class
+        """
+        if attr_type is int:
+            return int(value_to_type)
+        elif attr_type is float:
+            return float(value_to_type)
+        elif attr_type is str:
+            return str(value_to_type)
+        elif attr_type is tuple:
+            return tuple(value_to_type)
+        elif attr_type is list:
+            return list(value_to_type)
+        elif attr_type is dict:
+            return dict(value_to_type)
+
+    def check_attr_exist(self, obj, atr_to_find, value_to_cast):
+        """Check attribute exist in a class
+           if exist get the value of this attribute
+           and get the type of the value
+           then call type_casting to cast the value_to_cast
+           with the type of the attribute
+        """
+        if hasattr(obj, atr_to_find):
+            value_attr = getattr(obj, atr_to_find)
+            type_attr = type(value_attr)
+            value_to_cast = self.type_casting(type_attr, value_to_cast)
+            return value_to_cast
+        return value_to_cast
+
+    """ ***************************** """
+    """    Commands methods below     """
+    """ ***************************** """
+
     def default(self, line):
+        """
+        Method called if unknow command
+        Overwrite if command is in cmd
+        usage : name_class.cmd(<value>)
+        remove the string into tokens by dot, to have
+        the name class alone and cmd + value in other
+        remove the cmd from parentheses and take value inside
+        parenthese into an array, then call method to the cmd
+        called
+        """
         cmd = ['all', 'count', 'show', 'destroy', 'update']
         tokens = line.split('.', 1)
         method_cmd = tokens[1].split('(')[0]
         if len(tokens) > 1 and method_cmd in cmd:
             v = [p.split(')')[0] for p in tokens[1].split('(') if ')' in p]
             tmp = v[0].split(", ")
+            # Test below
+            # d_string = str(tmp[1]) + " " + str(tmp[2])
+            # string_d = d_string[1:-1].split(': ')
+            # self.remove_quote(string_d)
+            # print(dict(string_d))
+            # test end
             self.remove_quote(tmp)
             class_name = tokens[0]
             if method_cmd == "all":
@@ -197,10 +248,26 @@ class HBNBCommand(cmd.Cmd):
                 for i in HBNBCommand.dict_obj:
                     if i == obj_and_id:
                         if s[3][0] == '"' and s[3][-1] == '"':
-                            value = s[3][1:-1]
+                            vlue = s[3][1:-1]
+                        elif s[3][0] == "'" and s[3][-1] == "'":
+                            vlue = s[3][1:-1]
                         else:
-                            value = s[3]
-                        setattr(HBNBCommand.dict_obj[i], s[2], value)
+                            vlue = s[3]
+                        if s[0] == "Place":
+                            vlue = self.check_attr_exist(Place, s[2], vlue)
+                        elif s[0] == "BaseModel":
+                            vlue = self.check_attr_exist(BaseModel, s[2], vlue)
+                        elif s[0] == "User":
+                            vlue = self.check_attr_exist(User, s[2], vlue)
+                        elif s[0] == "City":
+                            vlue = self.check_attr_exist(City, s[2], vlue)
+                        elif s[0] == "State":
+                            vlue = self.check_attr_exist(State, s[2], vlue)
+                        elif s[0] == "Amenity":
+                            vlue = self.check_attr_exist(Amenity, s[2], vlue)
+                        elif s[0] == "Review":
+                            vlue = self.check_attr_exist(Review, s[2], vlue)
+                        setattr(HBNBCommand.dict_obj[i], s[2], vlue)
                         HBNBCommand.obj.save()
 
     def do_destroy(self, line):
