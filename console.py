@@ -73,11 +73,12 @@ class HBNBCommand(cmd.Cmd):
         loop to a list and remove double quote or simple
         quote from value
         """
-        for idx, element in enumerate(arr):
-            if element[0] == '"' and element[-1] == '"':
-                arr[idx] = element[1:-1]
-            elif element[0] == "'" and element[-1] == "'":
-                arr[idx] = element[1:-1]
+        if len(arr) > 1:
+            for idx, element in enumerate(arr):
+                if element[0] == '"' and element[-1] == '"':
+                    arr[idx] = element[1:-1]
+                elif element[0] == "'" and element[-1] == "'":
+                    arr[idx] = element[1:-1]
 
     def type_casting(self, attr_type, value_to_type):
         """ Check the type of attribute
@@ -128,7 +129,10 @@ class HBNBCommand(cmd.Cmd):
         """
         cmd = ['all', 'count', 'show', 'destroy', 'update']
         tokens = line.split('.', 1)
-        method_cmd = tokens[1].split('(')[0]
+        if len(tokens) > 1:
+            method_cmd = tokens[1].split('(')[0]
+        else:
+            method_cmd = tokens[0]
         if len(tokens) > 1 and method_cmd in cmd:
             v = [p.split(')')[0] for p in tokens[1].split('(') if ')' in p]
             tmp = v[0].split(", ")
@@ -152,7 +156,15 @@ class HBNBCommand(cmd.Cmd):
                 if len(tmp) == 1 and type(tmp[0]) is dict:
                     self.do_update(class_name + " " + tmp[0])
                 else:
-                    s = class_name + " " + tmp[0] + " " + tmp[1] + " " + tmp[2]
+                    s = class_name
+                    if len(tmp) == 3:
+                        s = s + " " + tmp[0] + " " + tmp[1] + " " + tmp[2]
+                    elif len(tmp) == 2:
+                        s = class_name + " " + tmp[0] + " " + tmp[1] + " " + ""
+                    elif len(tmp) == 1:
+                        s = class_name + " " + tmp[0] + " " + "" + " " + ""
+                    else:
+                        s = class_name + " " + "" + " " + "" + " " + ""
                     self.do_update(s)
         else:
             print("*** Unknown syntax: {}".format(line))
@@ -211,6 +223,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, line):
         """ Print all object from a class in a list """
+        # HBNBCommand.obj.reload()
         s = line.split()
         arr = []
         if len(s) == 0:
@@ -237,6 +250,7 @@ class HBNBCommand(cmd.Cmd):
         """ Update or add attribute of the object (class name and id given)
             id, created_at and updated_at can't be updated
         """
+        HBNBCommand.obj.reload()
         s = line.split()
         if self.check_command(s):
             if len(s) <= 2:
