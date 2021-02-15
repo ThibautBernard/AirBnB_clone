@@ -73,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
         loop to a list and remove double quote or simple
         quote from value
         """
-        if len(arr) > 1:
+        if arr[0] != '' and len(arr) >= 1:
             for idx, element in enumerate(arr):
                 if element[0] == '"' and element[-1] == '"':
                     arr[idx] = element[1:-1]
@@ -112,6 +112,26 @@ class HBNBCommand(cmd.Cmd):
             return value_to_cast
         return value_to_cast
 
+    def check_and_concat_string_from_list(self, class_name, l):
+        """
+        Check a list of arguments if correctly filled
+        and return a string from this
+        ex: miss arg2, concat with a space
+        l : list of arguments
+        For .update(<arg1>, <arg2>, <arg3>)
+        """
+        length_arr = len(l)
+        s = ""
+        if length_arr == 3:
+            s = class_name + " " + l[0] + " " + l[1] + " " + l[2]
+        elif length_arr == 2:
+            s = class_name + " " + l[0] + " " + l[1] + " " + ""
+        elif length_arr == 1:
+            s = class_name + " " + l[0] + " " + "" + " " + ""
+        else:
+            s = class_name + " " + "" + " " + "" + " " + ""
+        return s
+
     """ ***************************** """
     """    Commands methods below     """
     """ ***************************** """
@@ -129,13 +149,11 @@ class HBNBCommand(cmd.Cmd):
         """
         cmd = ['all', 'count', 'show', 'destroy', 'update']
         tokens = line.split('.', 1)
-        if len(tokens) > 1:
+        if len(tokens) > 1 and tokens[1].split('(')[0] in cmd:
             method_cmd = tokens[1].split('(')[0]
-        else:
-            method_cmd = tokens[0]
-        if len(tokens) > 1 and method_cmd in cmd:
             v = [p.split(')')[0] for p in tokens[1].split('(') if ')' in p]
-            tmp = v[0].split(", ")
+            if len(v) > 0:
+                tmp = v[0].split(", ")
             # Test below
             # d_string = str(tmp[1]) + " " + str(tmp[2])
             # string_d = d_string[1:-1].split(': ')
@@ -156,15 +174,7 @@ class HBNBCommand(cmd.Cmd):
                 if len(tmp) == 1 and type(tmp[0]) is dict:
                     self.do_update(class_name + " " + tmp[0])
                 else:
-                    s = class_name
-                    if len(tmp) == 3:
-                        s = s + " " + tmp[0] + " " + tmp[1] + " " + tmp[2]
-                    elif len(tmp) == 2:
-                        s = class_name + " " + tmp[0] + " " + tmp[1] + " " + ""
-                    elif len(tmp) == 1:
-                        s = class_name + " " + tmp[0] + " " + "" + " " + ""
-                    else:
-                        s = class_name + " " + "" + " " + "" + " " + ""
+                    s = self.check_and_concat_string_from_list(class_name, tmp)
                     self.do_update(s)
         else:
             print("*** Unknown syntax: {}".format(line))
@@ -242,6 +252,7 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, line):
         """ Show an object """
         s = line.split()
+        "print(s)"
         if self.check_command(s):
             object_to_print = self.split(HBNBCommand.dict_obj, s[1])
             print(object_to_print)

@@ -2,6 +2,8 @@
 import unittest
 from datetime import datetime
 from models.base_model import BaseModel
+
+
 class TestBase_model(unittest.TestCase):
 
     """Basic instanciation object__init__"""
@@ -11,9 +13,9 @@ class TestBase_model(unittest.TestCase):
         self.assertTrue(obj.id is not None)
 
     def test_is_id_is_string(self):
-        """ Test id is a string"""
+        """Test id is a string"""
         obj = BaseModel()
-        self.assertTrue(type(obj.id) ==  str)
+        self.assertTrue(type(obj.id) == str)
 
     def test_is_id_different_multiple_instance(self):
         """ Test that id is different with two instance object """
@@ -30,7 +32,9 @@ class TestBase_model(unittest.TestCase):
         """ Test that a date has been well created """
         obj = BaseModel()
         obj2 = BaseModel()
-        self.assertTrue(obj.created_at is not None and obj2.created_at is not None)
+        d1 = obj.created_at
+        d2 = obj.created_at
+        self.assertTrue(d1 is not None and d2 is not None)
 
     def test_is__created_date_is_object_datatime(self):
         """ Test that created_at is a object date"""
@@ -43,16 +47,19 @@ class TestBase_model(unittest.TestCase):
         self.assertTrue(obj.updated_at is not None)
 
     def test_is_updated_at_is_created_multiple_instance(self):
-        """ Test that updated_at attribute has been well created with multiple instance"""
+        """ Test that updated_at attribute
+        has been well created with multiple instance"""
         obj = BaseModel()
         obj2 = BaseModel()
-        self.assertTrue(obj.updated_at is not None and obj2.updated_at is not None)
+        d1 = obj.updated_at
+        d2 = obj.updated_at
+        self.assertTrue(d1 is not None and d2 is not None)
 
     def test_is_updated_at_is_object_datatime(self):
         """ Test that updated_at is a object date"""
         obj = BaseModel()
         self.assertTrue(type(obj.updated_at) == datetime)
-    
+
     """
         kwargs
     """
@@ -69,7 +76,7 @@ class TestBase_model(unittest.TestCase):
         save_dict = obj.to_dict()
         new_obj = BaseModel(**save_dict)
         self.assertTrue(type(new_obj.created_at) is datetime)
-    """ 
+    """
     def test_is_kwargs_ignore_one_attribute(self):
         obj = BaseModel()
         save_dict = obj.to_dict()
@@ -77,7 +84,7 @@ class TestBase_model(unittest.TestCase):
         with self.assertRaises(AttributeError):
             new_obj.__class__
     """
-    """ 
+    """
     Method to_dict()
     """
     def test_is_to_dict_return_a_dict(self):
@@ -102,7 +109,7 @@ class TestBase_model(unittest.TestCase):
             if i == "updated_at":
                 self.assertTrue(type(s[i]) is str)
 
-    """	
+    """
         Method __str__
     """
     def test_is_str_return_a_string(self):
@@ -110,18 +117,3 @@ class TestBase_model(unittest.TestCase):
         obj = BaseModel()
         s = str(obj)
         self.assertTrue(type(s) is str)
-
-    """
-        Method save()
-    
-    def test_is_save_update_well(self):
-        x = BaseModel()
-        x.save()
-        self.assertTrue(x.created_at != x.updated_at)
-
-    def test_is_save_update(self):
-        s = BaseModel()
-        h = s.updated_at
-        s.save()
-        self.assertTrue(h != s.updated_at)
-    """

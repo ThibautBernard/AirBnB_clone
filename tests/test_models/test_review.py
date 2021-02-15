@@ -7,6 +7,8 @@ from models.user import User
 from models.review import Review
 import os.path
 from os import path
+
+
 class TestReview(unittest.TestCase):
 
     def setUp(self):
@@ -27,14 +29,15 @@ class TestReview(unittest.TestCase):
         """ Test id created """
         obj = Review()
         self.assertTrue(type(obj) is Review)
-        
+
     def test_is_id_is_string(self):
         """ Test id is a string"""
         obj = Review()
-        self.assertTrue(type(obj.id) ==  str)
+        self.assertTrue(type(obj.id) == str)
 
     def test_is_id_different_multiple_instance(self):
-        """ Test that id is different with two instance object """
+        """ Test that id is different
+        with two instance object """
         obj = Review()
         obj2 = Review()
         self.assertTrue(obj.id != obj2.id)
@@ -48,7 +51,9 @@ class TestReview(unittest.TestCase):
         """ Test that a date has been well created """
         obj = Review()
         obj2 = Review()
-        self.assertTrue(obj.created_at is not None and obj2.created_at is not None)
+        d1 = obj.created_at
+        d2 = obj2.created_at
+        self.assertTrue(d1 is not None and d2 is not None)
 
     def test_is__created_date_is_object_datatime(self):
         """ Test that created_at is a object date"""
@@ -61,34 +66,37 @@ class TestReview(unittest.TestCase):
         self.assertTrue(obj.updated_at is not None)
 
     def test_is_updated_at_is_created_multiple_instance(self):
-        """ Test that updated_at attribute has been well created with multiple instance"""
+        """ Test that updated_at attribute
+        has been well created with multiple instance"""
         obj = Review()
         obj2 = Review()
-        self.assertTrue(obj.updated_at is not None and obj2.updated_at is not None)
+        d1 = obj.updated_at
+        d2 = obj2.updated_at
+        self.assertTrue(d1 is not None and d2 is not None)
 
     def test_is_updated_at_is_object_datatime(self):
         """ Test that updated_at is a object date"""
         obj = Review()
         self.assertTrue(type(obj.updated_at) == datetime)
-    
+
     def test_is_place_id_updated(self):
         """ Test that place_id attribute is well updated"""
         obj = Review()
         obj.place_id = "Thibaut"
         self.assertTrue(obj.place_id == "Thibaut")
-    
+
     def test_is_user_id_updated(self):
         """ Test that user_id attribute is well updated"""
         obj = Review()
         obj.user_id = "Thibaut"
         self.assertTrue(obj.user_id == "Thibaut")
-    
+
     def test_is_text_updated(self):
         """ Test that text attribute is well updated"""
         obj = Review()
         obj.text = "Thibaut"
         self.assertTrue(obj.text == "Thibaut")
-    
+
     """
         kwargs
     """
@@ -100,12 +108,13 @@ class TestReview(unittest.TestCase):
         self.assertTrue(save_dict == new_obj.to_dict())
 
     def test_is_kwargs_created_at_date_object(self):
-        """ Test that kwargs is instance created_at to date object """
+        """ Test that kwargs is
+        instance created_at to date object """
         obj = Review()
         save_dict = obj.to_dict()
         new_obj = Review(**save_dict)
         self.assertTrue(type(new_obj.created_at) is datetime)
-    """ 
+    """
     def test_is_kwargs_ignore_one_attribute(self):
         obj = BaseModel()
         save_dict = obj.to_dict()
@@ -113,11 +122,12 @@ class TestReview(unittest.TestCase):
         with self.assertRaises(AttributeError):
             new_obj.__class__
     """
-    """ 
+    """
     Method to_dict()
     """
     def test_is_to_dict_return_a_dict(self):
-        """ Test that the to_dict() method return well a dictionnary """
+        """ Test that the to_dict()
+        method return well a dictionnary """
         obj = Review()
         s = obj.to_dict()
         self.assertTrue(type(s) is dict)
@@ -130,7 +140,7 @@ class TestReview(unittest.TestCase):
             if i == "updated_at":
                 self.assertTrue(type(s[i]) is str)
 
-    """	
+    """
         Method __str__
     """
     def test_is_str_return_a_string(self):
@@ -138,7 +148,7 @@ class TestReview(unittest.TestCase):
         obj = Review()
         s = str(obj)
         self.assertTrue(type(s) is str)
-    
+
     def test_is_str_return_the_correct_class_name(self):
         """ Test that __str__ user as class name """
         obj = Review()
@@ -147,7 +157,6 @@ class TestReview(unittest.TestCase):
 
     """
         Method save()
-    
     def test_is_save_update_well(self):
         x = BaseModel()
         x.save()

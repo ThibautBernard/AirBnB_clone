@@ -5,10 +5,13 @@ from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 import os.path
 from os import path
+
+
 class Testfile_storage(unittest.TestCase):
 
     def setUp(self):
         FileStorage._FileStorage__objects = {}
+
     def tearDown(self):
         if os.path.exists("file.json"):
             os.remove("file.json")
@@ -44,4 +47,3 @@ class Testfile_storage(unittest.TestCase):
         f.reload()
         x = f.all()
         self.assertTrue(type(x['BaseModel.{}'.format(id)]) is BaseModel)
-    

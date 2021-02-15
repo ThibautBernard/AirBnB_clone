@@ -6,6 +6,8 @@ from models.engine.file_storage import FileStorage
 from models.user import User
 import os.path
 from os import path
+
+
 class TestBase_model(unittest.TestCase):
 
     def setUp(self):
@@ -26,11 +28,11 @@ class TestBase_model(unittest.TestCase):
         """ Test id created """
         obj = User()
         self.assertTrue(type(obj) is User)
-        
+
     def test_is_id_is_string(self):
         """ Test id is a string"""
         obj = User()
-        self.assertTrue(type(obj.id) ==  str)
+        self.assertTrue(type(obj.id) == str)
 
     def test_is_id_different_multiple_instance(self):
         """ Test that id is different with two instance object """
@@ -47,7 +49,9 @@ class TestBase_model(unittest.TestCase):
         """ Test that a date has been well created """
         obj = User()
         obj2 = User()
-        self.assertTrue(obj.created_at is not None and obj2.created_at is not None)
+        d1 = obj.created_at
+        d2 = obj2.created_at
+        self.assertTrue(d1 is not None and d2 is not None)
 
     def test_is__created_date_is_object_datatime(self):
         """ Test that created_at is a object date"""
@@ -60,41 +64,43 @@ class TestBase_model(unittest.TestCase):
         self.assertTrue(obj.updated_at is not None)
 
     def test_is_updated_at_is_created_multiple_instance(self):
-        """ Test that updated_at attribute has been well created with multiple instance"""
+        """ Test that updated_at attribute
+        has been well created with multiple instance"""
         obj = User()
         obj2 = User()
-        self.assertTrue(obj.updated_at is not None and obj2.updated_at is not None)
+        d1 = obj.updated_at
+        d2 = obj2.updated_at
+        self.assertTrue(d1 is not None and d2 is not None)
 
     def test_is_updated_at_is_object_datatime(self):
         """ Test that updated_at is a object date"""
         obj = User()
         self.assertTrue(type(obj.updated_at) == datetime)
-    
+
     def test_is_email_updated(self):
         """ Test that email attribute is well updated"""
         obj = User()
         obj.email = "Thibaut"
         self.assertTrue(obj.email == "Thibaut")
-    
+
     def test_is_password_updated(self):
         """ Test that password attribute is well updated"""
         obj = User()
         obj.password = "Thibaut"
         self.assertTrue(obj.password == "Thibaut")
-    
+
     def test_is_first_name_updated(self):
         """ Test that first_name attribute is well updated"""
         obj = User()
         obj.first_name = "Thibaut"
         self.assertTrue(obj.first_name == "Thibaut")
-    
+
     def test_is_last_name_updated(self):
         """ Test that last_name attribute is well updated"""
         obj = User()
         obj.last_name = "Thibaut"
         self.assertTrue(obj.last_name == "Thibaut")
-    
-    
+
     """
         kwargs
     """
@@ -111,7 +117,7 @@ class TestBase_model(unittest.TestCase):
         save_dict = obj.to_dict()
         new_obj = User(**save_dict)
         self.assertTrue(type(new_obj.created_at) is datetime)
-    """ 
+    """
     def test_is_kwargs_ignore_one_attribute(self):
         obj = BaseModel()
         save_dict = obj.to_dict()
@@ -119,7 +125,7 @@ class TestBase_model(unittest.TestCase):
         with self.assertRaises(AttributeError):
             new_obj.__class__
     """
-    """ 
+    """
     Method to_dict()
     """
     def test_is_to_dict_return_a_dict(self):
@@ -135,8 +141,7 @@ class TestBase_model(unittest.TestCase):
         for i in s:
             if i == "updated_at":
                 self.assertTrue(type(s[i]) is str)
-
-    """	
+    """
         Method __str__
     """
     def test_is_str_return_a_string(self):
@@ -144,7 +149,7 @@ class TestBase_model(unittest.TestCase):
         obj = User()
         s = str(obj)
         self.assertTrue(type(s) is str)
-    
+
     def test_is_str_return_the_correct_class_name(self):
         """ Test that __str__ user as class name """
         obj = User()
@@ -153,7 +158,6 @@ class TestBase_model(unittest.TestCase):
 
     """
         Method save()
-    
     def test_is_save_update_well(self):
         x = BaseModel()
         x.save()

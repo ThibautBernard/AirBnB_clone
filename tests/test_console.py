@@ -1,20 +1,24 @@
 #!/usr/bin/python3
 import unittest
 from io import StringIO
-from console import HBNBCommand 
+from console import HBNBCommand
 from unittest.mock import patch
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 import os.path
 from os import path
+"""
+    UnitTest for the command line interpreter
+"""
+
+
 class TestConsole(unittest.TestCase):
-    
     b = BaseModel()
-    
+
     def setUp(self):
         FileStorage._FileStorage__objects = {}
-        #if os.path.exists("file.json"):
-        #    os.remove("file.json")
+        # if os.path.exists("file.json"):
+        # os.remove("file.json")
 
     def tearDown(self):
         if os.path.exists("file.json"):
@@ -22,10 +26,9 @@ class TestConsole(unittest.TestCase):
     """
         Create cmd
     """
-
     def test_create_command_save_to_json_f(self):
         """ Test that create save to a json file """
-        #self.assertFalse(os.path.exists("file.json"))
+        # self.assertFalse(os.path.exists("file.json"))
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create BaseModel")
         self.assertTrue(os.path.exists("file.json"))
@@ -35,14 +38,13 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create")
         self.assertEqual("** class name missing **", f.getvalue().strip())
-        
+
     def test_create_wrong_name_class_err_msg(self):
         """ Test that create return a msg error """
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create ijd")
         self.assertEqual("** class doesn't exist **", f.getvalue().strip())
 
-    
     """
         show cmd
     """
@@ -52,7 +54,7 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("show")
         self.assertEqual("** class name missing **", f.getvalue().strip())
-        
+
     def test_show_wrong_name_class_err_msg(self):
         """ Test that show return a msg error """
         with patch('sys.stdout', new=StringIO()) as f:
@@ -70,7 +72,7 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("show BaseModel 654448")
         self.assertEqual("** no instance found **", f.getvalue().strip())
-    
+
     """
         destroy cmd
     """
@@ -80,7 +82,7 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("destroy")
         self.assertEqual("** class name missing **", f.getvalue().strip())
-        
+
     def test_destroy_wrong_name_class_err_msg(self):
         """ Test that destroy return a msg error """
         with patch('sys.stdout', new=StringIO()) as f:
@@ -118,7 +120,7 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("update")
         self.assertEqual("** class name missing **", f.getvalue().strip())
-        
+
     def test_update_wrong_name_class_err_msg(self):
         """ Test that update return a msg error """
         with patch('sys.stdout', new=StringIO()) as f:
@@ -136,7 +138,7 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("update BaseModel 654448")
         self.assertEqual("** no instance found **", f.getvalue().strip())
-    
+
     def test_update_attribute_name_missing_exist_err_msg(self):
         """ Test that update return a msg error """
         with patch('sys.stdout', new=StringIO()) as f:
@@ -148,18 +150,17 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("update BaseModel {} ddzdz".format(self.b.id))
         self.assertEqual("** value missing **", f.getvalue().strip())
-    
 
     """
         help cmd
     """
     def test_help_show_cmd(self):
         """ Test help on show command """
-        s = """Prints the string representation of an instance based on the class name and id"""
+        s = "Prints the string representation of an "
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("help show")
         self.assertTrue(s in f.getvalue().strip())
-    
+
     """
         quit cmd
 
@@ -178,7 +179,7 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("BaseMod.all()")
         self.assertEqual("** class doesn't exist **", f.getvalue().strip())
-    
+
     def test_dot_count_wrong_class_name_cmd(self):
         """ Test .count() with wrong class name command """
         with patch('sys.stdout', new=StringIO()) as f:
@@ -208,7 +209,7 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd(".show()")
         self.assertEqual("** class name missing **", f.getvalue().strip())
-    
+
     def test_dot_destroy_class_name_missing_cmd(self):
         """ Test .destroy() with class name missing command """
         with patch('sys.stdout', new=StringIO()) as f:
@@ -238,7 +239,6 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("BaseModel.destroy(54)")
         self.assertEqual("** no instance found **", f.getvalue().strip())
 
-
     def test_dot_update_wrong_class_name_cmd(self):
         """ Test .update() with wrong class name command """
         with patch('sys.stdout', new=StringIO()) as f:
@@ -262,19 +262,19 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd(".update()")
         self.assertEqual("** class name missing **", f.getvalue().strip())
-    
+
     def test_dot_update_attribute_missing_cmd(self):
         """ Test .update() with attribute missing command """
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("BaseModel.update({})".format(self.b.id))
         self.assertEqual("** attribute name missing **", f.getvalue().strip())
-    
+
     def test_dot_update_value_missing_cmd(self):
         """ Test .update() with value missing command """
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("BaseModel.update({}, lol)".format(self.b.id))
         self.assertEqual("** value missing **", f.getvalue().strip())
-    
+
     def test_dot_update_id_missing_cmd(self):
         """ Test .update() with id missing command """
         with patch('sys.stdout', new=StringIO()) as f:
