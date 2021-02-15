@@ -6,6 +6,13 @@ from models.base_model import BaseModel
 
 
 class User(BaseModel):
+    """
+    Class User that does a lot of things
+    Email: email of user
+    password: pwd of user
+    first_name: first_name of the user
+    last_name: last_name of the user
+    """
     email = ""
     password = ""
     first_name = ""
