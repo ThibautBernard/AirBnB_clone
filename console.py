@@ -9,7 +9,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-
+import json
 """
     HBNBCommand - command line interpreter to manage
     our object/classess
@@ -132,6 +132,22 @@ class HBNBCommand(cmd.Cmd):
             s = class_name + " " + "" + " " + "" + " " + ""
         return s
 
+    def put_element_in_list(self, l):
+        """
+        dict into list
+        remove bracket, guillemet, to put
+        element of the dict
+        into list
+        return the list
+        Start to 1, 0 is id of the object
+        """
+        new_list = []
+        for i in range(1, len(l)):
+            n = l[i].replace('{', '').replace('"', '')\
+                .replace("'", '').replace('}', '').replace(':', '')
+            new_list.append(n)
+        return new_list
+
     """ ***************************** """
     """    Commands methods below     """
     """ ***************************** """
@@ -149,17 +165,15 @@ class HBNBCommand(cmd.Cmd):
         """
         cmd = ['all', 'count', 'show', 'destroy', 'update']
         tokens = line.split('.', 1)
+        is_dict = 0
         if len(tokens) > 1 and tokens[1].split('(')[0] in cmd:
             method_cmd = tokens[1].split('(')[0]
             v = [p.split(')')[0] for p in tokens[1].split('(') if ')' in p]
             if len(v) > 0:
                 tmp = v[0].split(", ")
-            # Test below
-            # d_string = str(tmp[1]) + " " + str(tmp[2])
-            # string_d = d_string[1:-1].split(': ')
-            # self.remove_quote(string_d)
-            # print(dict(string_d))
-            # test end
+            if '{' in line:
+                is_dict = 1
+                d = self.put_element_in_list(tmp)
             self.remove_quote(tmp)
             class_name = tokens[0]
             if method_cmd == "all":
@@ -171,8 +185,9 @@ class HBNBCommand(cmd.Cmd):
             elif method_cmd == "destroy":
                 self.do_destroy(class_name + " " + tmp[0])
             elif method_cmd == "update":
-                if len(tmp) == 1 and type(tmp[0]) is dict:
-                    self.do_update(class_name + " " + tmp[0])
+                if is_dict:
+                    for i in range(len(d)):
+                        self.do_update(class_name + " " + tmp[0] + " " + d[i])
                 else:
                     s = self.check_and_concat_string_from_list(class_name, tmp)
                     self.do_update(s)
