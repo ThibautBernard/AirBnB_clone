@@ -42,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
             Return True if all argument are valid
             Return False if argument none vali
         """
-        if len(line) == 0:
+        if len(line) == 0 or line[0] == "()":
             print("** class name missing **")
             return False
         elif line[0] not in HBNBCommand.exist_class:
