@@ -10,6 +10,9 @@ import uuid
 
 
 class BaseModel:
+    """
+        Class that does a lot of things
+    """
     def __init__(self, *args, **kwargs):
         """Initialisation"""
         if len(kwargs) == 0 or kwargs is None:
