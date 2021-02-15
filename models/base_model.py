@@ -40,6 +40,12 @@ class BaseModel:
 
     def to_dict(self):
         """ Return a dict of object attributes and methods"""
+        d = self.__dict__.copy()
+        d["__class__"] = self.__class__.__name__
+        d["updated_at"] = d["updated_at"].isoformat()
+        d["created_at"] = d["created_at"].isoformat()
+        return d
+        """
         special_case = ["updated_at", "created_at"]
         dicto = {}
         for i in self.__dict__:
@@ -50,3 +56,4 @@ class BaseModel:
                 dicto[i] = getattr(self, i)
         dicto["__class__"] = self.__class__.__name__
         return dicto
+        """
