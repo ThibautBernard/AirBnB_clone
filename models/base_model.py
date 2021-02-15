@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-from datetime import datetime
-import models
-import uuid
 """
     BaseModel class - defines all common attributes/methods for other classes
     All classes inherit from this class
     Id object, date, Serialization & Deserialization
 """
+from datetime import datetime
+import models
+import uuid
 
 
 class BaseModel:
