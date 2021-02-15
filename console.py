@@ -24,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
     after.
     dict_obj : dictionary of all instance created
     """
-    prompt = '(hbtn) '
+    prompt = '(hbnb) '
     exist_class = [
             "BaseModel", "User", "State",
             "City", "Amenity", "Place", "Review"
