@@ -12,7 +12,7 @@ import uuid
 class BaseModel:
     def __init__(self, *args, **kwargs):
         """Initialisation"""
-        if len(kwargs) == 0:
+        if len(kwargs) == 0 or kwargs is None:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
