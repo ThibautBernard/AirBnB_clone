@@ -108,6 +108,24 @@ class TestConsole(unittest.TestCase):
         destroy cmd
     """
 
+    def test_del_with_all_classes(self):
+        """ Test with all classes """
+        c = {
+                'User': User, 'City': City, 'State': State, 'Amenity': Amenity,
+                'Place': Place, 'Review': Review,
+                'BaseModel': BaseModel
+                }
+        for i in c.keys():
+            o = c[i]()
+            with patch('sys.stdout', new=StringIO()) as x:
+                s = "Thibaut"
+                uo = o.id
+            with patch('sys.stdout', new=StringIO()) as z:
+                HBNBCommand().onecmd("destroy {} {}".format(i, o.id))
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("show {} {}".format(i, uo))
+            self.assertEqual("** no instance found **\n",  f.getvalue())
+
     def test_destroy_name_class_missing_err_msg(self):
         """ Test that destroy return a msg error """
         with patch('sys.stdout', new=StringIO()) as f:
@@ -406,6 +424,25 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("BaseModel.update()".format(self.b.id))
         self.assertEqual("** instance id missing **", f.getvalue().strip())
+
+    def test_dot_del_with_all_classes(self):
+        """ Test with all classes """
+        c = {
+                'User': User, 'City': City, 'State': State, 'Amenity': Amenity,
+                'Place': Place, 'Review': Review,
+                'BaseModel': BaseModel
+                }
+        for i in c.keys():
+            o = c[i]()
+            with patch('sys.stdout', new=StringIO()) as x:
+                s = "Thibaut"
+                uo = o.id
+            with patch('sys.stdout', new=StringIO()) as z:
+                HBNBCommand().onecmd("{}.destroy({})".format(i, o.id))
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("show {} {}".format(i, uo))
+            self.assertEqual("** no instance found **\n",  f.getvalue())
+
     """
     def test_dot_all_with_no_class_name_cmd(self):
         with patch('sys.stdout', new=StringIO()) as f:
