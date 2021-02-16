@@ -69,6 +69,8 @@ class FileStorage:
                         FileStorage.__objects[i] = BaseModel(**deserial[i])
                     elif name_class_only[0] == "User":
                         FileStorage.__objects[i] = User(**deserial[i])
+                    elif name_class_only[0] == "FileStorage":
+                        FileStorage.__objects[i] = FileStorage(**deserial[i])
                     elif name_class_only[0] == "State":
                         FileStorage.__objects[i] = State(**deserial[i])
                     elif name_class_only[0] == "Place":
