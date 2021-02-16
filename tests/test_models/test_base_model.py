@@ -67,13 +67,13 @@ class TestBase_model(unittest.TestCase):
     def test_is_id_is_string(self):
         """Test id is a string"""
         obj = BaseModel()
-        self.assertTrue(type(obj.id) == str)
+        self.assertEqual(type(obj.id), str)
 
     def test_is_id_different_multiple_instance(self):
         """ Test that id is different with two instance object """
         obj = BaseModel()
         obj2 = BaseModel()
-        self.assertTrue(obj.id != obj2.id)
+        self.assertNotEqual(obj.id, obj2.id)
 
     def test_is__created_date_is_created(self):
         """ Test that a date has been well created """
@@ -97,7 +97,7 @@ class TestBase_model(unittest.TestCase):
     def test_is__created_date_is_object_datatime(self):
         """ Test that created_at is a object date"""
         obj = BaseModel()
-        self.assertTrue(type(obj.created_at) == datetime)
+        self.assertEqual(type(obj.created_at), datetime)
 
     def test_is_updated_at_is_created(self):
         """ Test that updated_at attribute has been well created """
@@ -116,7 +116,7 @@ class TestBase_model(unittest.TestCase):
     def test_is_updated_at_is_object_datatime(self):
         """ Test that updated_at is a object date"""
         obj = BaseModel()
-        self.assertTrue(type(obj.updated_at) == datetime)
+        self.assertEqual(type(obj.updated_at), datetime)
 
     """
         kwargs
@@ -133,7 +133,7 @@ class TestBase_model(unittest.TestCase):
         obj = BaseModel()
         save_dict = obj.to_dict()
         new_obj = BaseModel(**save_dict)
-        self.assertTrue(type(new_obj.created_at) is datetime)
+        self.assertEqual(type(new_obj.created_at), datetime)
     """
     def test_is_kwargs_ignore_one_attribute(self):
         obj = BaseModel()
@@ -149,7 +149,7 @@ class TestBase_model(unittest.TestCase):
         """ Test that the to_dict() method return well a dictionnary """
         obj = BaseModel()
         s = obj.to_dict()
-        self.assertTrue(type(s) is dict)
+        self.assertEqual(type(s), dict)
 
     def test_is_to_dict_created_at_is_str(self):
         """ Test that to_dict() created_at is str in dictionary"""
@@ -157,7 +157,7 @@ class TestBase_model(unittest.TestCase):
         s = obj.to_dict()
         for i in s:
             if i == "created_at":
-                self.assertTrue(type(s[i]) is str)
+                self.assertEqual(type(s[i]), str)
 
     def test_is_to_dict_updated_at_is_str(self):
         """ Test that to_dict() updated_at is str in dictionary"""
@@ -165,7 +165,7 @@ class TestBase_model(unittest.TestCase):
         s = obj.to_dict()
         for i in s:
             if i == "updated_at":
-                self.assertTrue(type(s[i]) is str)
+                self.assertEqual(type(s[i]), str)
 
     """
         Method __str__
@@ -174,7 +174,7 @@ class TestBase_model(unittest.TestCase):
         """ Test that __str__return well a string """
         obj = BaseModel()
         s = str(obj)
-        self.assertTrue(type(s) is str)
+        self.assertEqual(type(s), str)
 
     def test_str(self):
         """ Test that str correct """
