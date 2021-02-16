@@ -5,7 +5,14 @@ from console import HBNBCommand
 from unittest.mock import patch
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+from models.place import Place
+from models.amenity import Amenity
+from models.city import City
+from models.review import Review
+from models.state import State
+from models.user import User
 import os.path
+from models import storage
 from os import path
 """
     UnitTest for the command line interpreter
@@ -15,14 +22,13 @@ from os import path
 class TestConsole(unittest.TestCase):
     b = BaseModel()
 
-    def setUp(self):
-        FileStorage._FileStorage__objects = {}
-        # if os.path.exists("file.json"):
-        # os.remove("file.json")
-
-    def tearDown(self):
-        if os.path.exists("file.json"):
-            os.remove("file.json")
+    # def setUp(self):
+    #    FileStorage._FileStorage__objects = {}
+    # if os.path.exists("file.json"):
+    # os.remove("file.json")
+    # def tearDown(self):
+    #    if os.path.exists("file.json"):
+    #        os.remove("file.json")
     """
         Create cmd
     """
@@ -45,9 +51,34 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("create ijd")
         self.assertEqual("** class doesn't exist **", f.getvalue().strip())
 
+    def test_create(self):
+        """ Test with all classes """
+        classes = [
+                    'User', 'City', 'State', 'Amenity',
+                    'Place', 'Review',
+                    'BaseModel'
+                    ]
+        for i in classes:
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("create {}".format(i))
+            self.assertTrue(len(f.getvalue().strip()) > 0)
     """
         show cmd
     """
+
+    def test_show(self):
+        """ Test with all classes """
+        storage.reload()
+        c = {
+                'User': User, 'City': City, 'State': State, 'Amenity': Amenity,
+                'Place': Place, 'Review': Review,
+                'BaseModel': BaseModel
+                }
+        for i in c.keys():
+            o = c[i]()
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("show {} {}".format(i, o.id))
+            self.assertEqual(str(o) + '\n', f.getvalue())
 
     def test_show_name_class_missing_err_msg(self):
         """ Test that show return a msg error """
@@ -105,6 +136,21 @@ class TestConsole(unittest.TestCase):
         all cmd
     """
 
+    def test_all_with_all_classes(self):
+        """ Test with all classes """
+        c = {
+                'User': User, 'City': City, 'State': State, 'Amenity': Amenity,
+                'Place': Place, 'Review': Review,
+                'BaseModel': BaseModel
+                }
+        if os.path.exists("file.json"):
+            os.remove("file.json")
+        for i in c.keys():
+            o = c[i]()
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("all {}".format(i))
+            self.assertTrue(str(o) in f.getvalue())
+
     def test_all_class_doesnt_exist_missing_err_msg(self):
         """ Test that all return a msg error """
         with patch('sys.stdout', new=StringIO()) as f:
@@ -114,6 +160,22 @@ class TestConsole(unittest.TestCase):
     """
         update cmd
     """
+
+    def test_update_with_all_classes(self):
+        """ Test with all classes """
+        c = {
+                'User': User, 'City': City, 'State': State, 'Amenity': Amenity,
+                'Place': Place, 'Review': Review,
+                'BaseModel': BaseModel
+                }
+        for i in c.keys():
+            o = c[i]()
+            with patch('sys.stdout', new=StringIO()) as x:
+                s = "Thibaut"
+                HBNBCommand().onecmd("update {} {} xd {}".format(i, o.id, s))
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("show {} {}".format(i, o.id))
+            self.assertTrue("Thibaut" in f.getvalue())
 
     def test_update_name_class_missing_err_msg(self):
         """ Test that update return a msg error """
@@ -185,6 +247,40 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("Bzdz.all()")
         self.assertEqual("** class doesn't exist **", f.getvalue().strip())
+
+    def test_count_(self):
+        """ Test count """
+        c = {
+                'User': User, 'City': City, 'State': State, 'Amenity': Amenity,
+                'Place': Place, 'Review': Review,
+                'BaseModel': BaseModel
+                }
+        counter = 0
+        for i in c.keys():
+            counter = 0
+            o = c[i]()
+            x = storage.all()
+            for y in x:
+                if i in y:
+                    counter += 1
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("{}.count()".format(i))
+            self.assertEqual(counter, int(f.getvalue().strip()))
+
+    def test_dot_all_with_all_classes(self):
+        """ Test with all classes """
+        c = {
+                'User': User, 'City': City, 'State': State, 'Amenity': Amenity,
+                'Place': Place, 'Review': Review,
+                'BaseModel': BaseModel
+                }
+        if os.path.exists("file.json"):
+            os.remove("file.json")
+        for i in c.keys():
+            o = c[i]()
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("{}.all()".format(i))
+            self.assertTrue(str(o) in f.getvalue())
 
     def test_dot_show_wrong_class_name_cmd(self):
         """ Test .show() with wrong class name command """
@@ -263,6 +359,22 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd(".update()")
         self.assertEqual("** class name missing **", f.getvalue().strip())
 
+    def test_dot_update_with_all_classes(self):
+        """ Test with all classes """
+        c = {
+                'User': User, 'City': City, 'State': State, 'Amenity': Amenity,
+                'Place': Place, 'Review': Review,
+                'BaseModel': BaseModel
+                }
+        for i in c.keys():
+            o = c[i]()
+            with patch('sys.stdout', new=StringIO()) as x:
+                s = "Thibaut"
+                HBNBCommand().onecmd("{}.update({}, x, {})".format(i, o.id, s))
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("show {} {}".format(i, o.id))
+            self.assertTrue("Thibaut" in f.getvalue())
+
     def test_dot_update_attribute_missing_cmd(self):
         """ Test .update() with attribute missing command """
         with patch('sys.stdout', new=StringIO()) as f:
@@ -274,6 +386,20 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("BaseModel.update({}, lol)".format(self.b.id))
         self.assertEqual("** value missing **", f.getvalue().strip())
+
+    def test_dot_show(self):
+        """ Test .show() with all classes """
+        storage.reload()
+        c = {
+                'User': User, 'City': City, 'State': State, 'Amenity': Amenity,
+                'Place': Place, 'Review': Review,
+                'BaseModel': BaseModel
+                }
+        for i in c.keys():
+            o = c[i]()
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("{}.show({})".format(i, o.id))
+            self.assertEqual(str(o) + '\n', f.getvalue())
 
     def test_dot_update_id_missing_cmd(self):
         """ Test .update() with id missing command """
