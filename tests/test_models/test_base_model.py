@@ -43,8 +43,13 @@ class TestBase_model(unittest.TestCase):
     def test_to_dict(self):
         """test attributes types in dict"""
         b = BaseModel()
+        b.name = "Mark"
+        b.age = 12
         dict_base = b.to_dict()
         self.assertEqual(dict_base['updated_at'], b.updated_at.isoformat())
+        self.assertEqual(dict_base['__class__'], "BaseModel")
+        self.assertEqual(dict_base['name'], "Mark")
+        self.assertEqual(dict_base['age'], 12)
         self.assertEqual(dict_base['created_at'], b.created_at.isoformat())
 
     def test_value_attr_type(self):
