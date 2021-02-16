@@ -65,6 +65,12 @@ class TestBase_model(unittest.TestCase):
         obj = BaseModel()
         self.assertTrue(obj.created_at is not None)
 
+    def test_uuid(self):
+        """ test uuid diff"""
+        b1 = BaseModel()
+        b2 = BaseModel()
+        self.assertNotEqual(b1.id, b2.id)
+
     def test_is_created_date_is_created(self):
         """ Test that a date has been well created """
         obj = BaseModel()
