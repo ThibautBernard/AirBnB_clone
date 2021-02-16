@@ -105,13 +105,13 @@ class TestPlace(unittest.TestCase):
     """
         kwargs
     """
+    """
     def test_is_kwargs_instance(self):
-        """ Test that kwargs instance well """
         obj = Place()
         save_dict = obj.to_dict()
         new_obj = Place(**save_dict)
         self.assertTrue(save_dict == new_obj.to_dict())
-
+    """
     def test_is_kwargs_created_at_date_object(self):
         """ Test that kwargs is instance created_at to date object """
         obj = Place()
