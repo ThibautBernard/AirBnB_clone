@@ -13,6 +13,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+from models import storage
 import json
 
 
@@ -199,6 +200,7 @@ class HBNBCommand(cmd.Cmd):
         """ Count number of instance created for the
         class_name
         """
+        storage.reload()
         counter_instance = 0
         if len(class_name) == 0 or len(class_name) == 2:
             print("** class name missing **")
@@ -213,6 +215,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, line):
         """ Create an instance """
+        storage.reload()
         if len(line) == 0:
             print("** class name missing **")
         elif line not in HBNBCommand.exist_class:
@@ -250,6 +253,7 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, line):
         """ Print all object from a class in a list """
         # HBNBCommand.obj.reload()
+        storage.reload()
         s = line.split()
         arr = []
         if len(s) == 0:
@@ -267,6 +271,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, line):
         """ Show an object """
+        storage.reload()
         s = line.split()
         "print(s)"
         if self.check_command(s):
@@ -278,6 +283,7 @@ class HBNBCommand(cmd.Cmd):
             id, created_at and updated_at can't be updated
         """
         # HBNBCommand.obj.reload()
+        storage.reload()
         s = line.split()
         if self.check_command(s):
             if len(s) <= 2:
@@ -313,6 +319,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, line):
         """ Destroy an object """
+        storage.reload()
         s = line.split()
         if self.check_command(s):
             obj_and_id = s[0] + '.' + s[1]
