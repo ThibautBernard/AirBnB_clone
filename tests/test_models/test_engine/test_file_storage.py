@@ -34,13 +34,13 @@ class Testfile_storage(unittest.TestCase):
         f.reload()
         x = f.all()
         self.assertTrue(len(x) > 0)
-        self.assertTrue(type(x) is dict)
+        self.assertEqual(type(x), dict)
 
     def test_all(self):
         """ test all() dict"""
         f = FileStorage()
         n = f.all()
-        self.assertTrue(type(n) is dict)
+        self.assertEqual(type(n), dict)
 
     def test_save(self):
         """test save correctly"""
@@ -48,7 +48,7 @@ class Testfile_storage(unittest.TestCase):
         b.name = "Berg"
         b.save()
         with open("file.json", "r") as f:
-            self.assertTrue(0 != len(f.read()))
+            self.assertNotEqual(0, len(f.read()))
 
     def test_reload_to_attribute_dict(self):
         """ Test that reload() reload from json file to an oject value"""
