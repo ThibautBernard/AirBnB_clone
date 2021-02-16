@@ -180,7 +180,7 @@ class TestBase_model(unittest.TestCase):
         """ Test that str correct """
         obj = BaseModel()
         s = "[BaseModel] ({}) {}".format(obj.id, obj.__dict__)
-        self.assertTrue(s, str(obj))
+        self.assertEqual(s, str(obj))
     """
         Method save()
     """
