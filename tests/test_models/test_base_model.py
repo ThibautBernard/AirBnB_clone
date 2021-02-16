@@ -71,9 +71,6 @@ class TestBase_model(unittest.TestCase):
         b1 = BaseModel()
         b2 = BaseModel()
         self.assertNotEqual(b1.id, b2.id)
-        self.assertRegex(b1.id, '^[0-9a-f]{8}-[0-9a-f]{4}'
-                                '-[0-9a-f]{4}-[0-9a-f]{4}'
-                                '-[0-9a-f]{12}$')
 
     def test_is_created_date_is_created(self):
         """ Test that a date has been well created """
