@@ -32,6 +32,11 @@ class TestUser(unittest.TestCase):
         self.assertEqual(type(obj.first_name), str)
         self.assertEqual(type(obj.last_name), str)
 
+    def test_user_inherit_baseModel(self):
+        """ Test that user is subclass to basemode"""
+        obj = User()
+        self.assertIsInstance(obj, BaseModel)
+
     def test_type_email(self):
         """ Test that type email is str"""
         obj = User()
@@ -64,18 +69,18 @@ class TestUser(unittest.TestCase):
     def test_user_is_instance_object_user(self):
         """ Test id created """
         obj = User()
-        self.assertTrue(type(obj) is User)
+        self.assertEqual(type(obj), User)
 
     def test_is_id_is_string(self):
         """ Test id is a string"""
         obj = User()
-        self.assertTrue(type(obj.id) == str)
+        self.assertEqual(type(obj.id), str)
 
     def test_is_id_different_multiple_instance(self):
         """ Test that id is different with two instance object """
         obj = User()
         obj2 = User()
-        self.assertTrue(obj.id != obj2.id)
+        self.assertNotEqual(obj.id, obj2.id)
 
     def test_is__created_date_is_created(self):
         """ Test that a date has been well created """
@@ -93,7 +98,7 @@ class TestUser(unittest.TestCase):
     def test_is__created_date_is_object_datatime(self):
         """ Test that created_at is a object date"""
         obj = User()
-        self.assertTrue(type(obj.created_at) == datetime)
+        self.assertEqual(type(obj.created_at), datetime)
 
     def test_is_updated_at_is_created(self):
         """ Test that updated_at attribute has been well created """
@@ -118,25 +123,25 @@ class TestUser(unittest.TestCase):
         """ Test that email attribute is well updated"""
         obj = User()
         obj.email = "Thibaut"
-        self.assertTrue(obj.email == "Thibaut")
+        self.assertEqual(obj.email, "Thibaut")
 
     def test_is_password_updated(self):
         """ Test that password attribute is well updated"""
         obj = User()
         obj.password = "Thibaut"
-        self.assertTrue(obj.password == "Thibaut")
+        self.assertEqual(obj.password, "Thibaut")
 
     def test_is_first_name_updated(self):
         """ Test that first_name attribute is well updated"""
         obj = User()
         obj.first_name = "Thibaut"
-        self.assertTrue(obj.first_name == "Thibaut")
+        self.assertEqual(obj.first_name, "Thibaut")
 
     def test_is_last_name_updated(self):
         """ Test that last_name attribute is well updated"""
         obj = User()
         obj.last_name = "Thibaut"
-        self.assertTrue(obj.last_name == "Thibaut")
+        self.assertEqual(obj.last_name, "Thibaut")
 
     """
         kwargs
@@ -152,7 +157,7 @@ class TestUser(unittest.TestCase):
         obj = User()
         save_dict = obj.to_dict()
         new_obj = User(**save_dict)
-        self.assertTrue(type(new_obj.created_at) is datetime)
+        self.assertEqual(type(new_obj.created_at), datetime)
     """
     def test_is_kwargs_ignore_one_attribute(self):
         obj = BaseModel()
@@ -168,7 +173,7 @@ class TestUser(unittest.TestCase):
         """ Test that the to_dict() method return well a dictionnary """
         obj = User()
         s = obj.to_dict()
-        self.assertTrue(type(s) is dict)
+        self.assertEqual(type(s), dict)
 
     def test_is_to_dict_updated_at_is_str(self):
         """ Test that to_dict() updated_at is str in dictionary"""
@@ -176,7 +181,7 @@ class TestUser(unittest.TestCase):
         s = obj.to_dict()
         for i in s:
             if i == "updated_at":
-                self.assertTrue(type(s[i]) is str)
+                self.assertEqual(type(s[i]), str)
     """
         Method __str__
     """
@@ -184,7 +189,7 @@ class TestUser(unittest.TestCase):
         """ Test that __str__return well a string """
         obj = User()
         s = str(obj)
-        self.assertTrue(type(s) is str)
+        self.assertEqual(type(s), str)
 
     def test_is_str_return_the_correct_class_name(self):
         """ Test that __str__ user as class name """
