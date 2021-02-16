@@ -56,6 +56,10 @@ class TestBase_model(unittest.TestCase):
         b = BaseModel()
         b.name = "empty"
         b.age = 13
+        f = "%Y-%m-%dT%H:%M:%S.%f"
+        d = b.to_dict()
+        self.assertEqual(d['created_at'], b.created_at.strftime(f))
+        self.assertEqual(d['updated_at'], b.updated_at.strftime(f))
         self.assertEqual("empty", b.name)
         self.assertEqual(13, b.age)
 
