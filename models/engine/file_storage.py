@@ -66,18 +66,34 @@ class FileStorage:
                     name_class_only = i.split('.')
                     # FileStorage.__objects[i] = o(**deserial[i])
                     if name_class_only[0] == "BaseModel":
-                        FileStorage.__objects[i] = BaseModel(**deserial[i])
+                        o = BaseModel(**deserial[i])
+                        self.new(o)
+                        # FileStorage.__objects[i] = BaseModel(**deserial[i])
                     elif name_class_only[0] == "User":
-                        FileStorage.__objects[i] = User(**deserial[i])
+                        o = User(**deserial[i])
+                        self.new(o)
+                        # FileStorage.__objects[i] = User(**deserial[i])
                     elif name_class_only[0] == "FileStorage":
-                        FileStorage.__objects[i] = FileStorage(**deserial[i])
+                        o = FileStorage(**deserial[i])
+                        self.new(o)
+                        # FileStorage.__objects[i] = FileStorage(**deserial[i])
                     elif name_class_only[0] == "State":
-                        FileStorage.__objects[i] = State(**deserial[i])
+                        o = State(**deserial[i])
+                        self.new(o)
+                        # FileStorage.__objects[i] = State(**deserial[i])
                     elif name_class_only[0] == "Place":
-                        FileStorage.__objects[i] = Place(**deserial[i])
+                        o = Place(**deserial[i])
+                        self.new(o)
+                        # FileStorage.__objects[i] = Place(**deserial[i])
                     elif name_class_only[0] == "City":
-                        FileStorage.__objects[i] = City(**deserial[i])
+                        o = City(**deserial[i])
+                        self.new(o)
+                        # FileStorage.__objects[i] = City(**deserial[i])
                     elif name_class_only[0] == "Amenity":
-                        FileStorage.__objects[i] = Amenity(**deserial[i])
+                        o = Amenity(**deserial[i])
+                        self.new(o)
+                        # FileStorage.__objects[i] = Amenity(**deserial[i])
                     elif name_class_only[0] == "Review":
-                        FileStorage.__objects[i] = Review(**deserial[i])
+                        o = Review(**deserial[i])
+                        self.new(o)
+                        # FileStorage.__objects[i] = Review(**deserial[i])
