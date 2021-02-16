@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+    Store objects - Serialization/Deserialization
+"""
 import json
 import os.path
 import sys
@@ -9,11 +12,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-
 from models.user import User
-"""
-    Store objects - Serialization/Deserialization
-"""
 
 
 class FileStorage:
