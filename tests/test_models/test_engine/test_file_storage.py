@@ -60,4 +60,4 @@ class Testfile_storage(unittest.TestCase):
         id = obj.id
         f.reload()
         x = f.all()
-        self.assertTrue(type(x['BaseModel.{}'.format(id)]) is BaseModel)
+        self.assertEqual(type(x['BaseModel.{}'.format(id)]),  BaseModel)
