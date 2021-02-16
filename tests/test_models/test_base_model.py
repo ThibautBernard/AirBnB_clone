@@ -6,6 +6,7 @@ import unittest
 from datetime import datetime
 from models.base_model import BaseModel
 import re
+from unittest.mock import patch
 
 
 class TestBase_model(unittest.TestCase):
@@ -38,7 +39,7 @@ class TestBase_model(unittest.TestCase):
         self.assertEqual(b.created_at, b.updated_at)
         self.assertTrue(before <= b.created_at <= after)
         n_b = BaseModel()
-        self.assertTrue(b.created_at != n_b.created_at)
+        self.assertNotEqual(b.created_at,  n_b.created_at)
 
     def test_to_dict(self):
         """test attributes types in dict"""
@@ -183,9 +184,14 @@ class TestBase_model(unittest.TestCase):
     """
         Method save()
     """
-    def test_save(self):
+    @patch('models.storage')
+    def testA_save(self, mock):
         """ Test that str correct """
         obj = BaseModel()
         before = obj.updated_at
+        before2 = obj.created_at
         obj.save()
-        self.assertTrue(before != obj.updated_at)
+        n1 = obj.created_at
+        n2 = obj.updated_at
+        self.assertNotEqual(before, n2)
+        self.assertEqual(before2, n1)
