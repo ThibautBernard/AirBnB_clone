@@ -35,12 +35,17 @@ class FileStorage:
             Serialize
             Save objects from dictionnary __objects into a file (format json)
         """
+        json_objects = {}
+        for key in FileStorage.__objects:
+            json_objects[key] = FileStorage.__objects[key].to_dict()
+        with open(FileStorage.__file_path, 'w') as file:
+            json.dump(json_objects, file)
+        """
         d = {}
         if len(FileStorage.__objects) > 0:
             for i in FileStorage.__objects:
                     if FileStorage.__objects[i] is dict:
                         d[i] = FileStorage.__objects[i]
-                        # FileStorage.__objects[i] = FileStorage.__objects[i]
                     else:
                         d[i] = FileStorage.__objects[i].to_dict()
             with open(self.__file_path, 'w') as f:
@@ -48,6 +53,7 @@ class FileStorage:
         else:
             with open(self.__file_path, 'w') as f:
                 f.write("")
+        """
 
     def reload(self):
         """ Deserialize
