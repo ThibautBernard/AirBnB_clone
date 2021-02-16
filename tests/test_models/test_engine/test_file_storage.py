@@ -50,6 +50,20 @@ class Testfile_storage(unittest.TestCase):
         with open("file.json", "r") as f:
             self.assertNotEqual(0, len(f.read()))
 
+    def test_two_save(self):
+        """test save correctly"""
+        b = BaseModel()
+        b.name = "Berg"
+        b.save()
+        with open("file.json", "r") as f:
+            self.assertNotEqual(0, len(f.read()))
+
+    def test_a(self):
+        return True
+
+    def test_b(self):
+        return True
+
     def test_reload_to_attribute_dict(self):
         """ Test that reload() reload from json file to an oject value"""
         obj = BaseModel()
