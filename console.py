@@ -276,7 +276,7 @@ class HBNBCommand(cmd.Cmd):
         """ Update or add attribute of the object (class name and id given)
             id, created_at and updated_at can't be updated
         """
-        HBNBCommand.obj.reload()
+        # HBNBCommand.obj.reload()
         s = line.split()
         if self.check_command(s):
             if len(s) <= 2:
@@ -384,7 +384,6 @@ class HBNBCommand(cmd.Cmd):
         print("--- Usage ---")
         print("-> (hbtn) update <class name> <id> " +
               "<attribute name> \"<attribute value>\"")
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
