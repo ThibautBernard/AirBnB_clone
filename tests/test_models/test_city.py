@@ -18,6 +18,18 @@ class TestCity(unittest.TestCase):
         if os.path.exists("file.json"):
             os.remove("file.json")
 
+    def test_type_name(self):
+        """ Test that type name is str"""
+        obj = City()
+        n = getattr(obj, "name")
+        self.assertIsInstance(n, str)
+
+    def test_type_state_id(self):
+        """ Test that type state_id is str"""
+        obj = City()
+        n = getattr(obj, "state_id")
+        self.assertIsInstance(n, str)
+
     """Basic instanciation object__init__"""
     def test_user_id_created(self):
         """ Test id created """

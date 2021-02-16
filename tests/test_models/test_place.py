@@ -18,6 +18,72 @@ class TestPlace(unittest.TestCase):
         if os.path.exists("file.json"):
             os.remove("file.json")
 
+    def test_type_city_id(self):
+        """ Test type"""
+        obj = Place()
+        n = getattr(obj, "city_id")
+        self.assertIsInstance(n, str)
+
+    def test_type_user_id(self):
+        """ Test type"""
+        obj = Place()
+        n = getattr(obj, "user_id")
+        self.assertIsInstance(n, str)
+
+    def test_type_description(self):
+        """ Test type"""
+        obj = Place()
+        n = getattr(obj, "description")
+        self.assertIsInstance(n, str)
+
+    def test_type_number_rooms(self):
+        """ Test type"""
+        obj = Place()
+        n = getattr(obj, "number_rooms")
+        self.assertIsInstance(n, int)
+
+    def test_type_number_bath(self):
+        """ Test type"""
+        obj = Place()
+        n = getattr(obj, "number_bathrooms")
+        self.assertIsInstance(n, int)
+
+    def test_type_max_guet(self):
+        """ Test type"""
+        obj = Place()
+        n = getattr(obj, "max_guest")
+        self.assertIsInstance(n, int)
+
+    def test_type_price_by_night(self):
+        """ Test type"""
+        obj = Place()
+        n = getattr(obj, "price_by_night")
+        self.assertIsInstance(n, int)
+
+    def test_type_latitude(self):
+        """ Test type"""
+        obj = Place()
+        n = getattr(obj, "latitude")
+        self.assertIsInstance(n, float)
+
+    def test_type_long(self):
+        """ Test type"""
+        obj = Place()
+        n = getattr(obj, "longitude")
+        self.assertIsInstance(n, float)
+
+    def test_type_ameni_id(self):
+        """ Test type"""
+        obj = Place()
+        n = getattr(obj, "amenity_ids")
+        self.assertIsInstance(n, list)
+
+    def test_type_name(self):
+        """ Test that type name is str"""
+        obj = Place()
+        n = getattr(obj, "name")
+        self.assertIsInstance(n, str)
+
     """Basic instanciation object__init__"""
     def test_Place_id_created(self):
         """ Test id created """

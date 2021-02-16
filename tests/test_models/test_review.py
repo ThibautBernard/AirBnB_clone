@@ -18,6 +18,24 @@ class TestReview(unittest.TestCase):
         if os.path.exists("file.json"):
             os.remove("file.json")
 
+    def test_type_place_id(self):
+        """ Test type"""
+        obj = Review()
+        n = getattr(obj, "place_id")
+        self.assertIsInstance(n, str)
+
+    def test_type_user_id(self):
+        """ Test type"""
+        obj = Review()
+        n = getattr(obj, "user_id")
+        self.assertIsInstance(n, str)
+
+    def test_type_text(self):
+        """ Test type"""
+        obj = Review()
+        n = getattr(obj, "text")
+        self.assertIsInstance(n, str)
+
     """Basic instanciation object__init__"""
     def test_Review_id_created(self):
         """ Test id created """
