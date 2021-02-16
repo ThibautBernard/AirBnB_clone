@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+    UnitTest for BaseModel
+"""
 import unittest
 from datetime import datetime
 from models.base_model import BaseModel
@@ -33,6 +36,7 @@ class TestBase_model(unittest.TestCase):
         b = BaseModel()
         after = datetime.now()
         self.assertEqual(b.created_at, b.updated_at)
+        self.assertTrue(before <= b.created_at <= after)
         n_b = BaseModel()
         self.assertTrue(b.created_at != n_b.created_at)
 
