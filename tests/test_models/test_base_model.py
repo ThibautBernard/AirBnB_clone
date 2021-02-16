@@ -26,6 +26,15 @@ class TestBase_model(unittest.TestCase):
         self.assertEqual(type(b.created_at), datetime)
         self.assertEqual(type(b.updated_at), datetime)
 
+    def test_date(self):
+        """Test date different"""
+        before = datetime.now()
+        b = BaseModel()
+        after = datetime.now()
+        self.assertEqual(b.created_at, b.updated_at)
+        n_b = BaseModel()
+        self.assertTrue(b.created_at != n_b.created_at)
+
     def test_to_dict_type(self):
         """test attributes types in dict"""
         b = BaseModel()
@@ -151,3 +160,12 @@ class TestBase_model(unittest.TestCase):
         obj = BaseModel()
         s = "[BaseModel] ({}) {}".format(obj.id, obj.__dict__)
         self.assertTrue(s, str(obj))
+    """
+        Method save()
+    """
+    def test_save_correct(self):
+        """ Test that str correct """
+        obj = BaseModel()
+        before = obj.updated_at
+        obj.save()
+        self.assertTrue(before != obj.updated_at)
