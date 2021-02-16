@@ -342,7 +342,7 @@ class HBNBCommand(cmd.Cmd):
 
     def help_quit(self):
         """ Documentation to quit command """
-        print("Quit command to exit the program")
+        print("Quit command to exit the program\n")
 
     def help_EOF(self):
         """ Documentation to EOF"""
