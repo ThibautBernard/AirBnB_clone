@@ -8,7 +8,7 @@ import os.path
 from os import path
 
 
-class TestBase_model(unittest.TestCase):
+class TestUser(unittest.TestCase):
 
     def setUp(self):
         FileStorage._FileStorage__objects = {}
