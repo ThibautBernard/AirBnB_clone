@@ -24,6 +24,35 @@ class TestBase_model(unittest.TestCase):
         self.assertTrue(obj.id is not None)
         self.assertTrue(type(obj) is User)
 
+    def test_type_email(self):
+        """ Test that type email is str"""
+        obj = User()
+        n = getattr(obj, "email")
+        self.assertIsInstance(n, str)
+
+    def test_type_pwd(self):
+        """ Test that type pswd is str"""
+        obj = User()
+        n = getattr(obj, "password")
+        self.assertIsInstance(n, str)
+
+    def test_type_first_name(self):
+        """ Test that type first_name is str"""
+        obj = User()
+        n = getattr(obj, "first_name")
+        self.assertIsInstance(n, str)
+
+    def test_type_last_name(self):
+        """ Test that type last_name is str"""
+        obj = User()
+        n = getattr(obj, "last_name")
+        self.assertIsInstance(n, str)
+
+    def test_user_inherit_basemodel(self):
+        """ Test that user inherit from BaseModel """
+        obj = User()
+        self.assertIsInstance(obj, BaseModel)
+
     def test_user_is_instance_object_user(self):
         """ Test id created """
         obj = User()
