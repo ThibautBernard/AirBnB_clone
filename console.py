@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+    HBNBCommand - command line interpreter to manage
+    our object/classess
+"""
 import cmd
 import sys
 from models.base_model import BaseModel
@@ -10,10 +14,6 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 import json
-"""
-    HBNBCommand - command line interpreter to manage
-    our object/classess
-"""
 
 
 class HBNBCommand(cmd.Cmd):
