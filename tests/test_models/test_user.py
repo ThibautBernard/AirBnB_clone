@@ -22,7 +22,15 @@ class TestUser(unittest.TestCase):
         """ Test id created """
         obj = User()
         self.assertTrue(obj.id is not None)
-        self.assertTrue(type(obj) is User)
+        self.assertEqual(type(obj), User)
+
+    def test_type_attr(self):
+        """ Test attr type"""
+        obj = User()
+        self.assertEqual(type(obj.email), str)
+        self.assertEqual(type(obj.password), str)
+        self.assertEqual(type(obj.first_name), str)
+        self.assertEqual(type(obj.last_name), str)
 
     def test_type_email(self):
         """ Test that type email is str"""
