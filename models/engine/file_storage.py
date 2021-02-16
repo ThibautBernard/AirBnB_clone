@@ -35,12 +35,6 @@ class FileStorage:
             Serialize
             Save objects from dictionnary __objects into a file (format json)
         """
-        json_objects = {}
-        for key in FileStorage.__objects:
-            json_objects[key] = FileStorage.__objects[key].to_dict()
-        with open(FileStorage.__file_path, 'w') as file:
-            json.dump(json_objects, file)
-        """
         d = {}
         if len(FileStorage.__objects) > 0:
             for i in FileStorage.__objects:
@@ -53,12 +47,20 @@ class FileStorage:
         else:
             with open(self.__file_path, 'w') as f:
                 f.write("")
-        """
 
     def reload(self):
         """ Deserialize
         Load object from the file into python objects
         to dictionnary __objects
+        """
+
+        try:
+            with open(self.__file_path) as f:
+                j = json.load(f)
+                for key, value in j.items():
+                    self.new(eval(value["__class__"])(**value))
+        except:
+            pass
         """
         file_not_empty = 0
         if path.exists(FileStorage.__file_path):
@@ -87,3 +89,4 @@ class FileStorage:
                         FileStorage.__objects[i] = Amenity(**deserial[i])
                     elif name_class_only[0] == "Review":
                         FileStorage.__objects[i] = Review(**deserial[i])
+        """
