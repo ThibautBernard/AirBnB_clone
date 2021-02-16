@@ -17,6 +17,7 @@ from models.user import User
 
 
 class FileStorage:
+    """ serialize, deserialize"""
     __file_path = "file.json"
     __objects = {}
 
@@ -26,8 +27,9 @@ class FileStorage:
 
     def new(self, obj):
         """ Add object in dictionnary __objects """
-        name_class = "{}.{}".format(obj.__class__.__name__, obj.id)
-        FileStorage.__objects.update({name_class: obj})
+        if obj is not None:
+            name_class = "{}.{}".format(obj.__class__.__name__, obj.id)
+            FileStorage.__objects.update({name_class: obj})
 
     def save(self):
         """
