@@ -12,6 +12,34 @@ class TestBase_model(unittest.TestCase):
         obj = BaseModel()
         self.assertTrue(obj.id is not None)
 
+    def test_class_type(self):
+        """ Test class type """
+        obj = BaseModel()
+        self.assertTrue(type(obj) is BaseModel)
+
+    def test_attributes_type(self):
+        """Test attr types"""
+        b = BaseModel()
+        b.name = "empty"
+        b.age = 13
+        self.assertEqual(type(b.id), str)
+        self.assertEqual(type(b.created_at), datetime)
+        self.assertEqual(type(b.updated_at), datetime)
+
+    def test_to_dict_type(self):
+        """test attributes types in dict"""
+        b = BaseModel()
+        dict_base = b.to_dict()
+        self.assertEqual(dict_base['updated_at'], b.updated_at.isoformat())
+        self.assertEqual(dict_base['created_at'], b.created_at.isoformat())
+
+    def test_value_attr_type(self):
+        b = BaseModel()
+        b.name = "empty"
+        b.age = 13
+        self.assertEqual("empty", b.name)
+        self.assertEqual(13, b.age)
+
     def test_is_id_is_string(self):
         """Test id is a string"""
         obj = BaseModel()
@@ -117,3 +145,9 @@ class TestBase_model(unittest.TestCase):
         obj = BaseModel()
         s = str(obj)
         self.assertTrue(type(s) is str)
+
+    def test_str_correct(self):
+        """ Test that str correct """
+        obj = BaseModel()
+        s = "[BaseModel] ({}) {}".format(obj.id, obj.__dict__)
+        self.assertTrue(s, str(obj))
