@@ -329,12 +329,12 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, line):
         """ EOF """
-        print("")
+        # print("")
         return True
 
     def emptyline(self):
         """Empty line send """
-        pass
+        return False
 
     """ ***************************** """
     """ Documentation commands below """
