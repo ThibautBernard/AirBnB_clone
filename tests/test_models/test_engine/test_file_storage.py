@@ -27,6 +27,11 @@ class Testfile_storage(unittest.TestCase):
         if os.path.exists("file.json"):
             os.remove("file.json")
 
+    def test_is_file_storage(self):
+        """ Test """
+        obj = FileStorage()
+        self.assertEqual(type(obj), FileStorage)
+
     def test_is_object_save_in_file(self):
         """ Test if save() save to a file """
         obj = BaseModel()

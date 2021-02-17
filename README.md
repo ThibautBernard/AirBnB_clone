@@ -76,4 +76,5 @@
   * Help on one command ``` (hbtn) all <command_name> ```
 * Quit the console ``` (hbtn) quit ```
 
+# This project was done by Thibaut
 #
