@@ -75,6 +75,18 @@
 * Help ``` (hbtn) help ```
   * Help on one command ``` (hbtn) all <command_name> ```
 * Quit the console ``` (hbtn) quit ```
+### Interactive mode
+``` echo create <class_name> | ./console.py ```
+### Non interactive mode
+``` (hbtn) create <class_name>  ```
+### Examples
+* Create a new user 
+``` 
+    (hbtn) create User  
+    (hbtn) 2b8b754e-5fc4-40e0-bd92-3524ae7e60cf
+    (hbtn) show User 2b8b754e-5fc4-40e0-bd92-3524ae7e60cf
+    (hbtn) [User] (7a872431-b5b5-4522-a9d5-6c46c55ce4c8) {'id': '7a872431-b5b5-4522-a9d5-6c46c55ce4c8', 'created_at': datetime.datetime(2021, 2, 18, 14, 19, 1, 817111), 'updated_at': datetime.datetime(2021, 2, 18, 14, 19, 1, 817184)}
 
-# This project was done by Thibaut
+```
+#### This project was done by Thibaut
 #
