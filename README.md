@@ -76,7 +76,7 @@
   * Help on one command ``` (hbtn) all <command_name> ```
 * Quit the console ``` (hbtn) quit ```
 ### Interactive mode
-``` echo create <class_name> | ./console.py ```
+``` echo "create <class_name>" | ./console.py ```
 ### Non interactive mode
 ``` (hbtn) create <class_name>  ```
 ### Examples
