@@ -44,6 +44,8 @@ class HBNBCommand(cmd.Cmd):
             Return False if argument none vali
         """
         # line[0] == "()"
+        if len(line) > 0:
+            self.remove_quote(line)
         if len(line) == 0:
             print("** class name missing **")
             return False
@@ -77,6 +79,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if arr[0] != '' and len(arr) >= 1:
             for idx, element in enumerate(arr):
+                # print(element)
                 if element[0] == '"' and element[-1] == '"':
                     arr[idx] = element[1:-1]
                 elif element[0] == "'" and element[-1] == "'":
@@ -200,6 +203,7 @@ class HBNBCommand(cmd.Cmd):
         """ Count number of instance created for the
         class_name
         """
+        storage.reload()
         counter_instance = 0
         if len(class_name) == 0 or len(class_name) == 2:
             print("** class name missing **")
@@ -214,6 +218,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, line):
         """ Create an instance """
+        storage.reload()
         if len(line) == 0:
             print("** class name missing **")
         elif line not in HBNBCommand.exist_class:
@@ -251,6 +256,7 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, line):
         """ Print all object from a class in a list """
         # HBNBCommand.obj.reload()
+        storage.reload()
         s = line.split()
         arr = []
         if len(s) == 0:
@@ -268,6 +274,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, line):
         """ Show an object """
+        storage.reload()
         s = line.split()
         "print(s)"
         if self.check_command(s):
@@ -278,6 +285,7 @@ class HBNBCommand(cmd.Cmd):
         """ Update or add attribute of the object (class name and id given)
             id, created_at and updated_at can't be updated
         """
+        storage.reload()
         # HBNBCommand.obj.reload()
         s = line.split()
         if self.check_command(s):
@@ -314,6 +322,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, line):
         """ Destroy an object """
+        storage.reload()
         s = line.split()
         if self.check_command(s):
             obj_and_id = s[0] + '.' + s[1]
