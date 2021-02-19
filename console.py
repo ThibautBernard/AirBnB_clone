@@ -56,19 +56,20 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return False
         else:
-            object_to_print = self.split(HBNBCommand.dict_obj, line[1])
-            if object_to_print is None:
+            obj_to_print = self.split(HBNBCommand.dict_obj, line[1], line[0])
+            if obj_to_print is None:
                 print("** no instance found **")
                 return False
         return True
 
-    def split(self, dict_obj, id_to_match):
+    def split(self, dict_obj, id_to_match, name_cls):
         """ Search in dict if there is an
             object with the same id
             If yes, return the object
         """
         for i in dict_obj:
-            if dict_obj[i].id == id_to_match:
+            t = type(dict_obj[i]).__name__
+            if dict_obj[i].id == id_to_match and name_cls == t:
                 return dict_obj[i]
         return None
 
@@ -278,7 +279,7 @@ class HBNBCommand(cmd.Cmd):
         s = line.split()
         "print(s)"
         if self.check_command(s):
-            object_to_print = self.split(HBNBCommand.dict_obj, s[1])
+            object_to_print = self.split(HBNBCommand.dict_obj, s[1], s[0])
             print(object_to_print)
 
     def do_update(self, line):
