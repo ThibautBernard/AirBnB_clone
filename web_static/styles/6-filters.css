@@ -1,7 +1,8 @@
 button{
     border: none;
 }
-section .filters ul.popover{
+/* Dropdown left*/
+section .filters .locations ul.popover{
     display: none;
 }
 section .filters .locations:hover ul.popover{
@@ -28,6 +29,7 @@ section .filters .locations:hover ul.popover li{
     margin-left: 8%;
     padding-top: 5%;
 }
+/* */
 section .filters{
     display: flex;
     flex-direction: row;
@@ -40,7 +42,7 @@ section .filters{
 }
 section .filters button{
     margin:0;
-    margin-left: 20%;
+    margin-left: 25%;
     font-size: 18px;
     background-color: #FF5A5F;
     color: #FFFFFF;
@@ -81,13 +83,48 @@ section .filters .locations h4{
     font-size: 14px;
     padding:0;
 }
+/** Droite **/
+
 section .filters .amenities{
+    display: flex;
+    flex-direction: column;
     margin:0;
-    margin-left: 5%;
     height: 100%;
     width: 25%;
 }
+section .filters .amenities ul.popover{
+    display: none;
+}
 
+
+section .filters .amenities:hover ul.popover{
+    margin:0;
+    padding-left: 10%;
+    padding-bottom: 20%;
+    display: flex;
+    margin-top: 7%;
+    flex-direction: column;
+    border: 1px solid #DDDD;
+    border-radius: 4px;
+    background-color: #FAFAFA;
+    list-style: none;
+    
+}
+.amenities ul.popover li{
+
+    margin: 0;
+    margin-top: 10%;
+    margin-left: 8%;
+    padding-top: 0%;
+}
+.amenities .amenitiespre
+{
+    margin:0;
+    padding:0;
+    margin-left: 17%;
+    margin-top: 1%;
+
+}
 section .filters .amenities h3{
     margin:0;
     margin-top: 5%;
@@ -100,5 +137,5 @@ section .filters .amenities h4{
     margin-top: 2%;
     font-weight: 400;
     font-size: 14px;
-    padding-bottom: 20%;
+    padding-bottom: 0;
 }
