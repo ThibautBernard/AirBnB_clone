@@ -67,3 +67,37 @@
     border-radius: 4px;
 }
 
+/** information section **/
+article .information{
+    display: flex;
+    margin-top: 2%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 80px;
+    width: 100%;
+    border-top: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+}
+article .information .max_guest{
+    display: flex;
+    flex-direction: column;
+    background-image: url("../images/max_guest.png");
+    background-repeat: no-repeat, repeat;
+    justify-content: flex-end;
+}
+
+article .information .number_rooms{
+    display: flex;
+    flex-direction: column;
+    background-image: url("../images/icon_bed.png");
+    background-repeat: no-repeat, repeat;
+    justify-content: flex-end;
+}
+
+article .information .number_bathrooms{
+    display: flex;
+    flex-direction: column;
+    background-image: url("../images/icon_bath.png");
+    background-repeat: no-repeat, repeat;
+    justify-content: flex-end;
+}
