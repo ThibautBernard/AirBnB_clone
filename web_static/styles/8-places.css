@@ -101,3 +101,18 @@ article .information .number_bathrooms{
     background-repeat: no-repeat, repeat;
     justify-content: flex-end;
 }
+
+/** owner section **/
+article .user{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+}
+article .user .owner_bold{
+    font-weight: bold;
+}
+article .user .owner_name{
+    margin-left: 1%;
+    padding-top: 0.2%;
+}
