@@ -1,7 +1,7 @@
 button{
     border: none;
 }
-section .filters{
+ .filters{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -12,7 +12,7 @@ section .filters{
     border: 1px solid #DDDD;
     border-radius: 4px;
 }
-section .filters button{
+ .filters button{
     position: absolute;
     right: 0;
     margin-right: 30px;
@@ -23,6 +23,6 @@ section .filters button{
     width: 20%;
     border-radius: 4px;
 }
-section .filters button:hover{
+ .filters button:hover{
     opacity: 90%;
 }
