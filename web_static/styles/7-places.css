@@ -17,7 +17,8 @@
 }
 .container .places .art_text article{
     margin: 20px;
-
+    display: flex;
+    flex-direction: column;
     padding: 20px;
     width: 390px;
     border: 1px solid #FF5A5F;
