@@ -5,6 +5,7 @@ section .filters{
     display: flex;
     flex-direction: row;
     align-items: center;
+    position: relative;
     background-color: white;
     height: 70px;
     width: 100%;
@@ -12,8 +13,8 @@ section .filters{
     border-radius: 4px;
 }
 section .filters button{
-    position: right;
-    margin-left: 80%;
+    position: absolute;
+    right: 0;
     margin-right: 30px;
     font-size: 18px;
     background-color: #FF5A5F;
