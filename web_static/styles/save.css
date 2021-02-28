@@ -1,7 +1,35 @@
 button{
     border: none;
 }
+/* Dropdown left*/
+ .filters .locations ul.popover{
+    display: none;
+}
+ .filters .locations:hover ul.popover{
+    
+    background-color: #FAFAFA;
+    padding:0;
+    list-style: none;
+    margin:0;
+    padding-left: 10%;
+    padding-bottom: 20%;
+    margin-top: 7%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #DDDD;
+    border-radius: 4px;
 
+}
+ .filters .locations:hover ul.popover h2{
+    margin-bottom:0;
+    margin-left: 0;
+}
+
+ .filters .locations:hover ul.popover li{
+    margin: 0;
+    margin-left: 8%;
+    padding-top: 5%;
+}
 /* */
  .filters{
     display: flex;
@@ -15,8 +43,7 @@ button{
 }
  .filters button{
     margin:0;
-    margin-left: 27%;
-    margin-right: 30px;
+    margin-left: 25%;
     font-size: 18px;
     background-color: #FF5A5F;
     color: #FFFFFF;
@@ -34,7 +61,6 @@ button{
     height: 100%;
     width: 25%;
     border-right: 1px solid #DDDDDD;
-    position: relative;
     
 }
 .locationpres
@@ -67,11 +93,25 @@ button{
     margin:0;
     height: 100%;
     width: 25%;
-    position:relative;
+}
+ .filters .amenities ul.popover{
+    display: none;
 }
 
 
-
+ .filters .amenities:hover ul.popover{
+    margin:0;
+    padding-left: 10%;
+    padding-bottom: 20%;
+    display: flex;
+    margin-top: 7%;
+    flex-direction: column;
+    border: 1px solid #DDDD;
+    border-radius: 4px;
+    background-color: #FAFAFA;
+    list-style: none;
+    
+}
 .amenities ul.popover li{
 
     margin: 0;
